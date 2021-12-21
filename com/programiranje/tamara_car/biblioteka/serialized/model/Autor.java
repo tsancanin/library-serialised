@@ -6,7 +6,7 @@ public class Autor extends Osoba {
 		super(id, ime, prezime);
 		
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Autor:  "+super.toString();
