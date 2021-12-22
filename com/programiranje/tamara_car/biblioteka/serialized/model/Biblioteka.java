@@ -15,6 +15,7 @@ public class Biblioteka implements Serializable{
 	
 	private ArrayList<Autor> autori = new ArrayList<Autor>();
 	private ArrayList<Clan> clanovi = new ArrayList<Clan>();
+	private ArrayList<Knjiga> knjige = new ArrayList<Knjiga>();
 	private ArrayList<EvidencijaKnjiga> evidencijaKnjiga = new ArrayList<EvidencijaKnjiga>();
 	private HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige = 
 			new HashMap<Zanrovi, HashMap<Autor,ArrayList<Knjiga>>>();
@@ -67,16 +68,24 @@ public class Biblioteka implements Serializable{
 	}
 
 	public Biblioteka(ArrayList<Autor> autori, ArrayList<Clan> clanovi, ArrayList<EvidencijaKnjiga> evidencijaKnjiga,
-			HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige) {
-		super();
+			HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige, ArrayList<Knjiga> knjige) {
 		this.autori = autori;
 		this.clanovi = clanovi;
 		this.evidencijaKnjiga = evidencijaKnjiga;
 		this.sveKnjige = sveKnjige;
+		this.knjige = knjige;
 	}
 
 	public void setAdresa(String adresa) {
 		this.adresa = adresa;
+	}
+	
+	public ArrayList<Knjiga> getKnjige() {
+		return knjige;
+	}
+
+	public void setKnjige(ArrayList<Knjiga> knjige) {
+		this.knjige = knjige;
 	}
 
 }

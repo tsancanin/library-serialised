@@ -1,17 +1,27 @@
 package programiranje.tamara_car.biblioteka.serialized.model;
 
 public class Knjiga {
-	
+
+	private int idKnjige;
 	private String naziv;
 	private Autor autor;
 	private int brojKnjiga;
 	private int duzinaPozajmice = 14;
-	
-	public Knjiga(String naziv, Autor autor, int brojKnjiga, int duzinaPozajmice) {
+
+	public Knjiga(int idKnjige, String naziv, Autor autor, int brojKnjiga, int duzinaPozajmice) {
+		this.idKnjige = idKnjige;
 		this.naziv = naziv;
 		this.autor = autor;
 		this.brojKnjiga = brojKnjiga;
 		this.duzinaPozajmice = duzinaPozajmice;
+	}
+
+	public int getIdKnjige() {
+		return idKnjige;
+	}
+
+	public void setIdKnjige(int idKnjige) {
+		this.idKnjige = idKnjige;
 	}
 
 	public String getNaziv() {
@@ -48,12 +58,8 @@ public class Knjiga {
 
 	@Override
 	public String toString() {
-		return "Knjiga [naziv=" + naziv + ", autor=" + autor + ", brojKnjiga=" + brojKnjiga + ", duzinaPozajmice="
-				+ duzinaPozajmice + "]";
+		return "Knjiga [idKnjige=" + idKnjige + ", naziv=" + naziv + ", autor=" + autor + ", brojKnjiga=" + brojKnjiga
+				+ ", duzinaPozajmice=" + duzinaPozajmice + "]";
 	}
-	
-	
-	
-	
 
 }
