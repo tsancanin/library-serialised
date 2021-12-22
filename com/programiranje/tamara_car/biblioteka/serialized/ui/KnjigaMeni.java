@@ -2,13 +2,13 @@ package programiranje.tamara_car.biblioteka.serialized.ui;
 
 import java.util.Scanner;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
+
 
 public class KnjigaMeni {
 	
 	public static Scanner in = new Scanner(System.in);
 	
-	public static void knjigeMeni(Biblioteka biblioteka) {
+	public static void knjigeMeni() {
 		
 		String opcija = null;
 		do {
