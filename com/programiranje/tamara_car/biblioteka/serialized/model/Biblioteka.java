@@ -4,24 +4,38 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Biblioteka implements Serializable{
+public class Biblioteka implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7554186585819634614L;
-	
-	private String naziv;
-	private String adresa;
-	
+
+	private String naziv = "Gradska biblioteka Novi Sad";
+	private String adresa = "Dunavska br.1";
+
 	private ArrayList<Autor> autori = new ArrayList<Autor>();
 	private ArrayList<Clan> clanovi = new ArrayList<Clan>();
-	private ArrayList<Knjiga> knjige = new ArrayList<Knjiga>();
+	private ArrayList<Zaposleni> zaposleni = new ArrayList<Zaposleni>();
 	private ArrayList<EvidencijaKnjiga> evidencijaKnjiga = new ArrayList<EvidencijaKnjiga>();
-	private HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige = 
-			new HashMap<Zanrovi, HashMap<Autor,ArrayList<Knjiga>>>();
-	
-	
-	private Biblioteka() {}
+	private HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige = new HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>>();
+
+	public Biblioteka() {
+	}
+
+	public Biblioteka(String naziv, String adresa) {
+		this.naziv = naziv;
+		this.adresa = adresa;
+	}
+
+	public Biblioteka(ArrayList<Autor> autori, ArrayList<Clan> clanovi, ArrayList<Zaposleni> zaposleni,
+			ArrayList<EvidencijaKnjiga> evidencijaKnjiga, HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige,
+			ArrayList<Knjiga> knjige) {
+		this.autori = autori;
+		this.clanovi = clanovi;
+		this.zaposleni = zaposleni;
+		this.evidencijaKnjiga = evidencijaKnjiga;
+		this.sveKnjige = sveKnjige;
+	}
 
 	public String getNaziv() {
 		return naziv;
@@ -33,6 +47,10 @@ public class Biblioteka implements Serializable{
 
 	public String getAdresa() {
 		return adresa;
+	}
+
+	public void setAdresa(String adresa) {
+		this.adresa = adresa;
 	}
 
 	public ArrayList<Autor> getAutori() {
@@ -51,6 +69,14 @@ public class Biblioteka implements Serializable{
 		this.clanovi = clanovi;
 	}
 
+	public ArrayList<Zaposleni> getZaposleni() {
+		return zaposleni;
+	}
+
+	public void setZaposleni(ArrayList<Zaposleni> zaposleni) {
+		this.zaposleni = zaposleni;
+	}
+
 	public ArrayList<EvidencijaKnjiga> getEvidencijaKnjiga() {
 		return evidencijaKnjiga;
 	}
@@ -65,27 +91,6 @@ public class Biblioteka implements Serializable{
 
 	public void setSveKnjige(HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige) {
 		this.sveKnjige = sveKnjige;
-	}
-
-	public Biblioteka(ArrayList<Autor> autori, ArrayList<Clan> clanovi, ArrayList<EvidencijaKnjiga> evidencijaKnjiga,
-			HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige, ArrayList<Knjiga> knjige) {
-		this.autori = autori;
-		this.clanovi = clanovi;
-		this.evidencijaKnjiga = evidencijaKnjiga;
-		this.sveKnjige = sveKnjige;
-		this.knjige = knjige;
-	}
-
-	public void setAdresa(String adresa) {
-		this.adresa = adresa;
-	}
-	
-	public ArrayList<Knjiga> getKnjige() {
-		return knjige;
-	}
-
-	public void setKnjige(ArrayList<Knjiga> knjige) {
-		this.knjige = knjige;
 	}
 
 }

@@ -2,13 +2,13 @@ package programiranje.tamara_car.biblioteka.serialized.ui;
 
 import java.util.Scanner;
 
+import programiranje.tamara_car.biblioteka.serialized.ui.util.Validacije;
+
 public class ClanMeni {
 
-	public static Scanner in = new Scanner(System.in);
-
 	public static void clanMeni() {
-		String opcija = null;
-		do {
+	
+		while(true) {
 			System.out.println("---Clan meni---");
 			System.out.println("1. Ispis svih clanova: ");
 			System.out.println("2. Dodaj novog clana: ");
@@ -18,33 +18,33 @@ public class ClanMeni {
 			System.out.println("6. Pretraga clanova po imenu i prezimenu: ");
 			System.out.println(" X - izlaz");
 
-			opcija = in.nextLine();
-
+		Integer	opcija = Validacije.unosBroja(1, 6);
+		
+		if(opcija == null) {
+			return;
+		}
 			switch (opcija) {
-			case "1":
+			case 1:
 				ispisSvihClanova();
 				break;
-			case "2":
+			case 2:
 				dodajNovogClana();
 				break;
-			case "3":
+			case 3:
 				izmeniPostojecegClana();
 				break;
-			case "4":
+			case 4:
 				obrisiClana();
 				break;
-			case "5":
+			case 5:
 				pretragaPoClanskomBroju();
 				break;
-			case "6":
+			case 6:
 				pretragaPoImenuIprezimenu();
-				break;
-
-			default:
 				break;
 			}
 
-		} while (!opcija.equals("x"));
+		}
 
 	}
 	
