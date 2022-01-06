@@ -10,7 +10,7 @@ import programiranje.tamara_car.biblioteka.serialized.ui.util.Validacije;
 
 public class ZaposleniMeni {
 	public static Scanner in = new Scanner(System.in);
-	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+	
 	public static void zaposleniMeni(Biblioteka biblioteka) {
 		
 		while(true) {
@@ -81,7 +81,6 @@ public class ZaposleniMeni {
 		System.out.println("Unesite adresu zaposlenog: ");
 		String adresa = in.nextLine();
 		
-		
 		System.out.println("Unesite broj telefona zaposlenog: ");
 		Integer broj = Integer.parseInt(in.nextLine());
 		
@@ -104,18 +103,45 @@ public class ZaposleniMeni {
 	}
 	
 	public static void izmeniZaposlenog(Biblioteka biblioteka) {
-		System.out.println("metoda - izmeni zaposlenog");
+		System.out.println("Unesite id zaposlenog: ");
+		int idZaposlenog = Integer.parseInt(in.nextLine());
+		
+		for(Zaposleni zaposleni: biblioteka.getZaposleni()) {
+			while(zaposleni.getId()==idZaposlenog) {
+				idZaposlenog = Integer.parseInt(in.nextLine());
+			}
+		}
+		
+		
+		
 	}
 	
 	public static void obrisiZaposlenog(Biblioteka biblioteka) {
 		System.out.println("metoda - obrisi zaposlenog");
 	}
 	public static void pretragaPoIdu(Biblioteka biblioteka) {
-		System.out.println("metoda - pretraga po id u");
+		System.out.println("Unesite id zaposlenog: ");
+		int idZaposlenog = Integer.parseInt(in.nextLine());
+		
+		for(Zaposleni zaposleni: biblioteka.getZaposleni()) {
+			if(zaposleni.getId()==idZaposlenog) {
+				System.out.println(zaposleni);
+			}
+		}
 	}
 	
 	public static void pretragaPoImenuIprezimenu(Biblioteka biblioteka) {
-		System.out.println("metoda - pretragaPoImenuIprezimenu");
+		System.out.println("Unesite ime novog zaposlenog:");
+		String ime = in.nextLine();
+		
+		System.out.println("Unesite prezime novog zaposlenog: ");
+		String prezime = in.nextLine();
+		
+		for(Zaposleni zaposleni: biblioteka.getZaposleni()) {
+			if(zaposleni.getIme().equals(ime) && zaposleni.getPrezime().equals(prezime)) {
+				System.out.println(zaposleni);
+			}
+		}
 	}
 
 }
