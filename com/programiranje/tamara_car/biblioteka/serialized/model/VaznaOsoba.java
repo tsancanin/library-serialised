@@ -3,11 +3,18 @@ package programiranje.tamara_car.biblioteka.serialized.model;
 import java.time.LocalDate;
 
 public abstract class VaznaOsoba extends Osoba{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2352707807405598460L;
 	private LocalDate datumRodjenja;
 	private String adresa;
 	private int brojTelefona;
 	private String mail;
 	
+	public VaznaOsoba() {
+		super();
+	}
 	
 	public VaznaOsoba(int id, String ime, String prezime, LocalDate datumRodjenja, String adresa,int brojTelefona, String mail) {
 		super(id, ime, prezime);

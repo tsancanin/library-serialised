@@ -4,8 +4,16 @@ import java.time.LocalDate;
 
 public class Zaposleni extends VaznaOsoba {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3725661009685673401L;
 	private String brojZdravstvenog;
 	private String brojSocijalnog;
+	
+	public Zaposleni() {
+		super();
+	}
 	
 	public Zaposleni(int id, String ime, String prezime, LocalDate datumRodjenja, String adresa, int brojTelefona,
 			String mail, String brojZdravstvenog, String brojSocijalnog) {

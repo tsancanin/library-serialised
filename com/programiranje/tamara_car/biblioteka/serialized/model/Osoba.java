@@ -1,10 +1,18 @@
 package programiranje.tamara_car.biblioteka.serialized.model;
 
-public abstract class Osoba {
+import java.io.Serializable;
+
+public abstract class Osoba implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7112126032955868254L;
 	private int id;
 	private String ime;
 	private String prezime;
+	
+	public Osoba() {}
 	
 	public Osoba(int id, String ime, String prezime) {
 		this.id = id;
@@ -38,7 +46,7 @@ public abstract class Osoba {
 
 	@Override
 	public String toString() {
-		return "Osoba [id=" + id + ", ime=" + ime + ", prezime=" + prezime + "]";
+		return "ID: " + id + ", ime: " + ime + ", prezime: " + prezime + "]";
 	}
 	
 	

@@ -1,19 +1,26 @@
 package programiranje.tamara_car.biblioteka.serialized.model;
 
-public class Knjiga {
+import java.io.Serializable;
 
+public class Knjiga implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 520243975431957223L;
 	private int idKnjige;
 	private String naziv;
 	private Autor autor;
+	private Zanrovi zanr;
 	private int brojKnjiga;
-	private int duzinaPozajmice = 14;
+	
 
-	public Knjiga(int idKnjige, String naziv, Autor autor, int brojKnjiga, int duzinaPozajmice) {
+	public Knjiga(int idKnjige, String naziv, Autor autor,Zanrovi zanr ,int brojKnjiga) {
 		this.idKnjige = idKnjige;
 		this.naziv = naziv;
 		this.autor = autor;
+		this.zanr = zanr;
 		this.brojKnjiga = brojKnjiga;
-		this.duzinaPozajmice = duzinaPozajmice;
 	}
 
 	public int getIdKnjige() {
@@ -40,6 +47,14 @@ public class Knjiga {
 		this.autor = autor;
 	}
 
+	public Zanrovi getZanr() {
+		return zanr;
+	}
+
+	public void setZanr(Zanrovi zanr) {
+		this.zanr = zanr;
+	}
+
 	public int getBrojKnjiga() {
 		return brojKnjiga;
 	}
@@ -48,18 +63,12 @@ public class Knjiga {
 		this.brojKnjiga = brojKnjiga;
 	}
 
-	public int getDuzinaPozajmice() {
-		return duzinaPozajmice;
-	}
-
-	public void setDuzinaPozajmice(int duzinaPozajmice) {
-		this.duzinaPozajmice = duzinaPozajmice;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "Knjiga [idKnjige=" + idKnjige + ", naziv=" + naziv + ", autor=" + autor + ", brojKnjiga=" + brojKnjiga
-				+ ", duzinaPozajmice=" + duzinaPozajmice + "]";
+		return "Knjiga [idKnjige=" + idKnjige + ", naziv=" + naziv + ", autor=" + autor + ", zanr=" + zanr
+				+ ", brojKnjiga=" + brojKnjiga + "]";
 	}
+	
 
 }

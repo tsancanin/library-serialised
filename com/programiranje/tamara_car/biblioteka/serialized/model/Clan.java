@@ -1,8 +1,13 @@
 package programiranje.tamara_car.biblioteka.serialized.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Clan extends VaznaOsoba {
+public class Clan extends VaznaOsoba implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2412713962555379125L;
 	private int clanskiBroj;
 	
 	
@@ -13,6 +18,8 @@ public class Clan extends VaznaOsoba {
 		
 	}
 
+	public Clan() {}
+	
 	public int getClanskiBroj() {
 		return clanskiBroj;
 	}
@@ -23,7 +30,7 @@ public class Clan extends VaznaOsoba {
 
 	@Override
 	public String toString() {
-		return  "Clan [clanskiBroj=" + clanskiBroj+ super.toString();
+		return  "clanskiBroj: " + clanskiBroj + super.toString();
 	}
 	
 	
