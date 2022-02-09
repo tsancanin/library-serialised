@@ -30,7 +30,7 @@ public class Clan extends VaznaOsoba implements Serializable {
 
 	@Override
 	public String toString() {
-		return  "clanskiBroj: " + clanskiBroj + super.toString();
+		return (super.toString() + ",\n| clanskiBroj: " + clanskiBroj);
 	}
 	
 	

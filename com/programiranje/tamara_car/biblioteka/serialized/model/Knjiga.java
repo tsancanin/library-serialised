@@ -66,6 +66,7 @@ public class Knjiga implements Serializable {
 	
 	@Override
 	public String toString() {
+		//TODO: uraditi preko string buffera lep ispis
 		return "Knjiga [idKnjige=" + idKnjige + ", naziv=" + naziv + ", autor=" + autor + ", zanr=" + zanr
 				+ ", brojKnjiga=" + brojKnjiga + "]";
 	}

@@ -46,7 +46,12 @@ public abstract class Osoba implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ID: " + id + ", ime: " + ime + ", prezime: " + prezime + "]";
+		return (
+			"========================="
+			+ "\n| id: " + id 
+			+ ",\n| ime: " + ime 
+			+ ",\n| prezime: " + prezime
+		);
 	}
 	
 	

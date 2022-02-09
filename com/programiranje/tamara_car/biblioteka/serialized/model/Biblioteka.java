@@ -3,6 +3,8 @@ package programiranje.tamara_car.biblioteka.serialized.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Biblioteka implements Serializable {
 	/**
@@ -28,15 +30,15 @@ public class Biblioteka implements Serializable {
 		this.adresa = adresa;
 	}
 
-	public Biblioteka(ArrayList<Autor> autori, ArrayList<Clan> clanovi, ArrayList<Zaposleni> zaposleni,
-			ArrayList<Pozajmica> evidencijaPozajmica, HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige,
-			ArrayList<Knjiga> knjige) {
-		this.autori = autori;
-		this.clanovi = clanovi;
-		this.zaposleni = zaposleni;
-		this.evidencijaPozajmica = evidencijaPozajmica;
-		this.sveKnjige = sveKnjige;
-	}
+//	public Biblioteka(ArrayList<Autor> autori, ArrayList<Clan> clanovi, ArrayList<Zaposleni> zaposleni,
+//			ArrayList<Pozajmica> evidencijaPozajmica, HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige,
+//			ArrayList<Knjiga> knjige) {
+//		this.autori = autori;
+//		this.clanovi = clanovi;
+//		this.zaposleni = zaposleni;
+//		this.evidencijaPozajmica = evidencijaPozajmica;
+//		this.sveKnjige = sveKnjige;
+//	}
 
 	public String getNaziv() {
 		return naziv;
@@ -93,5 +95,14 @@ public class Biblioteka implements Serializable {
 	public void setSveKnjige(HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige) {
 		this.sveKnjige = sveKnjige;
 	}
-
+	
+	public List<Knjiga> getListaKnjiga() {
+		ArrayList<Knjiga> trazeneKnjige = new ArrayList<Knjiga>();
+		for (Map.Entry<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> zanrovi : sveKnjige.entrySet()) {
+			for (Map.Entry<Autor, ArrayList<Knjiga>> autor : zanrovi.getValue().entrySet()) {
+				trazeneKnjige.addAll(autor.getValue());
+			}
+		}
+		return trazeneKnjige;
+	}
 }

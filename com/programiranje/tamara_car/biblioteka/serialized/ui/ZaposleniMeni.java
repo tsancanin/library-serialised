@@ -104,7 +104,7 @@ public class ZaposleniMeni {
 
 		for (Zaposleni zaposleniNadjeni : zaposleni) {
 			if (zaposleniNadjeni.getId() == idZaposlenog) {
-				System.out.println(zaposleniNadjeni);
+				return zaposleniNadjeni;
 			}
 		}
 		return null;

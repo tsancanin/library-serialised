@@ -59,8 +59,13 @@ public abstract class VaznaOsoba extends Osoba{
 
 	@Override
 	public String toString() {
-		return super.toString()+ "datumRodjenja=" + datumRodjenja + ", adresa=" + adresa + ", brojTelefona=" + brojTelefona
-				+ ", mail=" + mail + "]";
+		return (
+			super.toString()
+			+ "\n| datumRodjenja=" + datumRodjenja 
+			+ ",\n| adresa=" + adresa 
+			+ ",\n| brojTelefona=" + brojTelefona
+			+ ",\n| mail=" + mail
+		);
 	}
 	
 	

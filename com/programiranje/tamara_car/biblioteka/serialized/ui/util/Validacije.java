@@ -48,7 +48,7 @@ public class Validacije {
 		while (true) {
 			String unos = in.nextLine();
 			unos = unos.strip();
-			if (min != null && unos.length() < min ) {
+			if (min != null && unos.length() < min) {
 				System.out.println("Duzina teksta mora da bude veca ili jednaka od " + min);
 				continue;
 			}
@@ -66,12 +66,29 @@ public class Validacije {
 		return unosTeksta(null, null);
 	}
 	
-	public static LocalDate parsiranDatum() {
-		while(true) {
-		String unosDatuma = Validacije.unosTeksta();
-		LocalDate unos = LocalDate.parse(unosDatuma, dtf);
-		return unos;
+	public static LocalDate unosDatuma (String unos) {
+	
+		try {
+			LocalDate datum = LocalDate.parse(unos, dtf);
+			return datum;
+		} catch (Exception e) {
+			return null;
 		}
+	}
+
+	public static LocalDate parsiranDatum() {
+		LocalDate datum;
+		do {	
+		 datum = unosDatuma(Validacije.unosTeksta());
+		 if(datum == null) {
+			 System.out.println("Neispravan format datuma, unesite ponovo: ");
+		 }
+		}while(datum==null);
+		
+		return datum;
+		
+		
+		
 	}
 
 	public static String proveraMaila() {
