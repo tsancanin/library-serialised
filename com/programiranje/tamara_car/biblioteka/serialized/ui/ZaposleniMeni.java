@@ -3,14 +3,14 @@ package programiranje.tamara_car.biblioteka.serialized.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
-import programiranje.tamara_car.biblioteka.serialized.model.Zaposleni;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validacije;
+import programiranje.tamara_car.biblioteka.serialized.model.Library;
+import programiranje.tamara_car.biblioteka.serialized.model.Librarian;
+import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
 import programiranje.tamara_car.biblioteka.serialized.ui.util.ZaposleniValidacije;
 
 public class ZaposleniMeni {
 
-	public static void zaposleniMeni(Biblioteka biblioteka) {
+	public static void zaposleniMeni(Library biblioteka) {
 
 		while (true) {
 			System.out.println("---Zaposleni meni---");
@@ -22,7 +22,7 @@ public class ZaposleniMeni {
 			System.out.println("6. Pretraga zaposlenih po imenu i prezimenu: ");
 			System.out.println(" X - izlaz");
 
-			Integer opcija = Validacije.unosBroja(1, 6);
+			Integer opcija = Validation.numberEntry(1, 6);
 			if (opcija == null) {
 				return;
 			}
@@ -34,7 +34,7 @@ public class ZaposleniMeni {
 				dodajNovogZaposlenog(biblioteka);
 				break;
 			case 3: {
-				Zaposleni zaposleni = pretragaPoIdu(biblioteka.getZaposleni());
+				Librarian zaposleni = pretragaPoIdu(biblioteka.getZaposleni());
 				if (zaposleni != null) {
 					ZaposleniValidacije.izmeniZaposlenog(zaposleni);
 				} else {
@@ -46,7 +46,7 @@ public class ZaposleniMeni {
 				obrisiZaposlenog(biblioteka);
 				break;
 			case 5: {
-				Zaposleni trazeni = pretragaPoIdu(biblioteka.getZaposleni());
+				Librarian trazeni = pretragaPoIdu(biblioteka.getZaposleni());
 				if (trazeni != null) {
 					System.out.println(trazeni);
 				} else {
@@ -55,11 +55,11 @@ public class ZaposleniMeni {
 				break;
 			}
 			case 6: {
-				List<Zaposleni> nadjeni = pretragaPoImenuIprezimenu(biblioteka.getZaposleni());
+				List<Librarian> nadjeni = pretragaPoImenuIprezimenu(biblioteka.getZaposleni());
 				if (nadjeni.isEmpty()) {
 					System.out.println("Trazeni zaposleni ne postoji.");
 				} else {
-					for (Zaposleni zaposleni : nadjeni) {
+					for (Librarian zaposleni : nadjeni) {
 						System.out.println(zaposleni);
 					}
 				}
@@ -69,25 +69,25 @@ public class ZaposleniMeni {
 		}
 	}
 
-	public static void ispisSvihZaposlenih(List<Zaposleni> zaposleni) {
-		for (Zaposleni zaposleniNadjeni : zaposleni) {
+	public static void ispisSvihZaposlenih(List<Librarian> zaposleni) {
+		for (Librarian zaposleniNadjeni : zaposleni) {
 			System.out.println(zaposleniNadjeni);
 		}
 	}
 
-	public static void dodajNovogZaposlenog(Biblioteka biblioteka) {
+	public static void dodajNovogZaposlenog(Library biblioteka) {
 
-		Zaposleni zaposleni = ZaposleniValidacije.dodajNovogZaposlenog();
+		Librarian zaposleni = ZaposleniValidacije.dodajNovogZaposlenog();
 		do {
 			boolean nadjen = false;
-			for (Zaposleni trenutni : biblioteka.getZaposleni()) {
+			for (Librarian trenutni : biblioteka.getZaposleni()) {
 				nadjen = trenutni.getId() == zaposleni.getId();
 				if (nadjen)
 					break;
 			}
 			if (nadjen) {
 				System.out.println("ID je zauzet. Unesite novi ID: ");
-				Integer noviId = Validacije.unosBroja(1, null);
+				Integer noviId = Validation.numberEntry(1, null);
 				zaposleni.setId(noviId);
 			} else {
 				break;
@@ -98,11 +98,11 @@ public class ZaposleniMeni {
 
 	}
 
-	public static Zaposleni pretragaPoIdu(List<Zaposleni> zaposleni) {
+	public static Librarian pretragaPoIdu(List<Librarian> zaposleni) {
 		System.out.println("Unesite id zaposlenog: ");
-		Integer idZaposlenog = Validacije.unosBroja(1, null);
+		Integer idZaposlenog = Validation.numberEntry(1, null);
 
-		for (Zaposleni zaposleniNadjeni : zaposleni) {
+		for (Librarian zaposleniNadjeni : zaposleni) {
 			if (zaposleniNadjeni.getId() == idZaposlenog) {
 				return zaposleniNadjeni;
 			}
@@ -110,14 +110,14 @@ public class ZaposleniMeni {
 		return null;
 	}
 
-	public static List<Zaposleni> pretragaPoImenuIprezimenu(List<Zaposleni> zaposleni) {
+	public static List<Librarian> pretragaPoImenuIprezimenu(List<Librarian> zaposleni) {
 
 		System.out.println("Unesite tekst za pretragu: ");
-		String tekst = Validacije.unosTeksta(3, null);
+		String tekst = Validation.textEntry(3, null);
 
-		List<Zaposleni> nadjeni = new ArrayList<Zaposleni>();
+		List<Librarian> nadjeni = new ArrayList<Librarian>();
 
-		for (Zaposleni zaposleniNadjeni : zaposleni) {
+		for (Librarian zaposleniNadjeni : zaposleni) {
 			if (zaposleniNadjeni.getIme().toLowerCase().contains(tekst.toLowerCase())
 					|| zaposleniNadjeni.getPrezime().toLowerCase().contains(tekst.toLowerCase())) {
 				nadjeni.add(zaposleniNadjeni);
@@ -127,12 +127,12 @@ public class ZaposleniMeni {
 
 	}
 
-	public static Zaposleni odabirZaposlenog(List<Zaposleni> zaposleni) {
+	public static Librarian odabirZaposlenog(List<Librarian> zaposleni) {
 
 		System.out.println("1. Pretraga zaposlenog po ID u: ");
 		System.out.println("2. Pretraga zaposlenog po imenu i prezimenu: ");
 
-		Integer opcija = Validacije.unosBroja(1, 2);
+		Integer opcija = Validation.numberEntry(1, 2);
 		if (opcija == 1) {
 			return pretragaPoIdu(zaposleni);
 		} else {
@@ -141,22 +141,22 @@ public class ZaposleniMeni {
 
 	}
 
-	public static Zaposleni odabirZaposlenogPoImenuIprezimenu(List<Zaposleni> zaposleni) {
+	public static Librarian odabirZaposlenogPoImenuIprezimenu(List<Librarian> zaposleni) {
 
-		List<Zaposleni> nadjeni = pretragaPoImenuIprezimenu(zaposleni);
+		List<Librarian> nadjeni = pretragaPoImenuIprezimenu(zaposleni);
 
 		for (int i = 0; i < nadjeni.size(); i++) {
 			System.out.println(i + 1 + ". " + nadjeni.get(i));
 		}
 
 		System.out.println(" Odaberite zaposlenog(unesite broj): ");
-		Integer odabir = Validacije.unosBroja(1, nadjeni.size());
+		Integer odabir = Validation.numberEntry(1, nadjeni.size());
 
 		return nadjeni.get(odabir - 1);
 	}
 
-	public static void obrisiZaposlenog(Biblioteka biblioteka) {
-		Zaposleni nadjen = odabirZaposlenog(biblioteka.getZaposleni());
+	public static void obrisiZaposlenog(Library biblioteka) {
+		Librarian nadjen = odabirZaposlenog(biblioteka.getZaposleni());
 
 		if (nadjen == null) {
 			System.out.println("Zaposleni nije pronadjen.");

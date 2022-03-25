@@ -6,43 +6,43 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
-import programiranje.tamara_car.biblioteka.serialized.ui.GlavniMeni;
+import programiranje.tamara_car.biblioteka.serialized.model.Library;
+import programiranje.tamara_car.biblioteka.serialized.ui.MainMenu;
 
 public class Main {
 
-	private static final String IME_FAJLA = "biblioteka.ser";
+	private static final String FILE_NAME = "biblioteka.ser";
 
 	public static void main(String[] args) {
-		Biblioteka biblioteka = ucitavanjeBiblioteke();
-		GlavniMeni.glavniMeni(biblioteka);
-		cuvanjeBiblioteke(biblioteka);
+		Library library = loadingLibrary();
+		MainMenu.mainMenu(library);
+		saveLibrary(library);
 	}
 
-	private static Biblioteka ucitavanjeBiblioteke() {
-		Biblioteka biblioteka = new Biblioteka();
+	private static Library loadingLibrary() {
+		Library library = new Library();
 
-		try (FileInputStream fis = new FileInputStream(IME_FAJLA);
+		try (FileInputStream fis = new FileInputStream(FILE_NAME);
 				ObjectInputStream ois = new ObjectInputStream(fis);) {
-			biblioteka = (Biblioteka) ois.readObject();
+			library = (Library) ois.readObject();
 		} catch (IOException ioe) {
-			System.out.println("Fajl " + IME_FAJLA + " nije pronadjen");
-			System.out.println("Inicijalizuje se nova biblioteka");
+			System.out.println("File " + FILE_NAME + " not found");
+			System.out.println("A new library is initialized");
 		} catch (ClassNotFoundException cnfe) {
-			System.out.println("Greska u ucitavanju biblioteke");
-			System.out.println("Inicijalizuje se nova biblioteka");
+			System.out.println("Error loading library");
+			System.out.println("A new library is initialized");
 		}
-		return biblioteka;
+		return library;
 	}
 	
-	private static void cuvanjeBiblioteke(Biblioteka biblioteka) {
+	private static void saveLibrary(Library library) {
 		try (
-			FileOutputStream fos = new FileOutputStream(IME_FAJLA); 
+			FileOutputStream fos = new FileOutputStream(FILE_NAME); 
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 		) {
-	      oos.writeObject(biblioteka);
+	      oos.writeObject(library);
 	    } catch (IOException ioe) {
-	      System.out.println("Problem u cuvanju biblioteke");
+	      System.out.println("Error loading library.");
 	      ioe.printStackTrace();
 	    }
 	}

@@ -4,20 +4,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Autor;
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
-import programiranje.tamara_car.biblioteka.serialized.model.Clan;
-import programiranje.tamara_car.biblioteka.serialized.model.Knjiga;
-import programiranje.tamara_car.biblioteka.serialized.model.Pozajmica;
-import programiranje.tamara_car.biblioteka.serialized.model.Zaposleni;
+import programiranje.tamara_car.biblioteka.serialized.model.Author;
+import programiranje.tamara_car.biblioteka.serialized.model.Library;
+import programiranje.tamara_car.biblioteka.serialized.model.Member;
+import programiranje.tamara_car.biblioteka.serialized.model.Book;
+import programiranje.tamara_car.biblioteka.serialized.model.Loan;
+import programiranje.tamara_car.biblioteka.serialized.model.Librarian;
 import programiranje.tamara_car.biblioteka.serialized.ui.ClanMeni;
 import programiranje.tamara_car.biblioteka.serialized.ui.KnjigaMeni;
 import programiranje.tamara_car.biblioteka.serialized.ui.ZaposleniMeni;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validacije;
+import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
 
 public class DodavanjePozajmiceMeni {
 
-	public static Pozajmica kreirajNovuPozajmicu(Pozajmica zaKreiranje, Biblioteka biblioteka) {
+	public static Loan kreirajNovuPozajmicu(Loan zaKreiranje, Library biblioteka) {
 
 		while (true) {
 			System.out.println("=========================================");
@@ -33,7 +33,7 @@ public class DodavanjePozajmiceMeni {
 			System.out.println("7. Zakljuci izdavanje ");
 			System.out.println("  Ponisti iznamljivanje X  ");
 
-			Integer opcija = Validacije.unosBroja(1, 7);
+			Integer opcija = Validation.numberEntry(1, 7);
 
 			if (opcija == null) {
 				return null;
@@ -67,8 +67,8 @@ public class DodavanjePozajmiceMeni {
 		}
 	}
 
-	public static void dodajKnjiguUIznajmljene(Pozajmica zaKreiranje, Biblioteka biblioteka) {
-		Knjiga odabrana = KnjigaMeni.odabirPretrageKnjige(biblioteka.getListaKnjiga(), biblioteka.getAutori());
+	public static void dodajKnjiguUIznajmljene(Loan zaKreiranje, Library biblioteka) {
+		Book odabrana = KnjigaMeni.odabirPretrageKnjige(biblioteka.getListOfBooks(), biblioteka.getAutori());
 		if (odabrana != null) {
 			zaKreiranje.getPozajmljeneKnjige().add(odabrana);
 			System.out.println("Dodata: " + odabrana.getNaziv());
@@ -76,19 +76,19 @@ public class DodavanjePozajmiceMeni {
 
 	}
 
-	public static void obrisiKnjiguIzPozajmice(Pozajmica zaKreiranje) {
-		List<Knjiga> trenutnoDodate = zaKreiranje.getPozajmljeneKnjige();
+	public static void obrisiKnjiguIzPozajmice(Loan zaKreiranje) {
+		List<Book> trenutnoDodate = zaKreiranje.getPozajmljeneKnjige();
 		if (trenutnoDodate.isEmpty()) {
 			System.out.println("Pozajmica nema dodatih knjiga");
 			return;
 		}
 
-		List<Autor> samoAktivniAutori = new ArrayList<Autor>();
-		for (Knjiga knjiga : trenutnoDodate) {
+		List<Author> samoAktivniAutori = new ArrayList<Author>();
+		for (Book knjiga : trenutnoDodate) {
 			samoAktivniAutori.add(knjiga.getAutor());
 		}
 
-		Knjiga odabrana = KnjigaMeni.odabirPretrageKnjige(trenutnoDodate, samoAktivniAutori);
+		Book odabrana = KnjigaMeni.odabirPretrageKnjige(trenutnoDodate, samoAktivniAutori);
 		if (odabrana == null) {
 			System.out.println("Uklanjanje ponisteno");
 			return;
@@ -99,8 +99,8 @@ public class DodavanjePozajmiceMeni {
 
 	}
 
-	public static void promeniBibliotekara(Pozajmica zaKreiranje, Biblioteka biblioteka) {
-		Zaposleni nadjeni = ZaposleniMeni.odabirZaposlenog(biblioteka.getZaposleni());
+	public static void promeniBibliotekara(Loan zaKreiranje, Library biblioteka) {
+		Librarian nadjeni = ZaposleniMeni.odabirZaposlenog(biblioteka.getZaposleni());
 		if (nadjeni == null) {
 			System.out.println("Ponisteno menjanje bibliotekara");
 			return;
@@ -109,8 +109,8 @@ public class DodavanjePozajmiceMeni {
 		System.out.println("Bibliotekar promenjen");
 	}
 
-	public static void promeniClana(Pozajmica zaKreiranje, Biblioteka biblioteka) {
-		Clan odabrani = ClanMeni.odabirClana(biblioteka.getClanovi());
+	public static void promeniClana(Loan zaKreiranje, Library biblioteka) {
+		Member odabrani = ClanMeni.odabirClana(biblioteka.getClanovi());
 		if (odabrani == null) {
 			System.out.println("Ponisteno menjanje clana");
 			return;
@@ -119,9 +119,9 @@ public class DodavanjePozajmiceMeni {
 		System.out.println("Clan promenjen");
 	}
 
-	public static void promeniDuzinuTrajanjaPozajmice(Pozajmica zaKreiranje) {
+	public static void promeniDuzinuTrajanjaPozajmice(Loan zaKreiranje) {
 		System.out.println("Unesi novo trajanje pozajmice");
-		Integer duzina = Validacije.unosBroja(1, null);
+		Integer duzina = Validation.numberEntry(1, null);
 		if (duzina == null) {
 			System.out.println("Ponisteno menjanje trajanja");
 			return;
@@ -130,9 +130,9 @@ public class DodavanjePozajmiceMeni {
 		System.out.println("Duzina pozajmice je uspesno promenjena.");
 	}
 
-	public static void promeniDatumIznamljivanja(Pozajmica zaKreiranje) {
+	public static void promeniDatumIznamljivanja(Loan zaKreiranje) {
 		System.out.println("Unesi novi datum pozajmljivanja");
-		LocalDate datum = Validacije.parsiranDatum();
+		LocalDate datum = Validation.parsedDate();
 		if (datum == null) {
 			System.out.println("Ponistena izmena datuma");
 			return;

@@ -6,20 +6,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Autor;
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
-import programiranje.tamara_car.biblioteka.serialized.model.Knjiga;
-import programiranje.tamara_car.biblioteka.serialized.model.Zanrovi;
+import programiranje.tamara_car.biblioteka.serialized.model.Author;
+import programiranje.tamara_car.biblioteka.serialized.model.Library;
+import programiranje.tamara_car.biblioteka.serialized.model.Book;
+import programiranje.tamara_car.biblioteka.serialized.model.Genres;
 import programiranje.tamara_car.biblioteka.serialized.ui.util.AutorValidacije;
 import programiranje.tamara_car.biblioteka.serialized.ui.util.KnjigaValidacije;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validacije;
+import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
 import programiranje.tamara_car.biblioteka.serialized.ui.util.ZanroviValidacije;
 
 public class KnjigaMeni {
 
 	public static Scanner in = new Scanner(System.in);
 
-	public static void knjigeMeni(Biblioteka biblioteka) {
+	public static void knjigeMeni(Library biblioteka) {
 
 		while (true) {
 
@@ -37,7 +37,7 @@ public class KnjigaMeni {
 			System.out.println("11.Knjige po autoru: ");
 			System.out.println(" X izlaz ");
 
-			Integer opcija = Validacije.unosBroja(1, 11);
+			Integer opcija = Validation.numberEntry(1, 11);
 
 			if (opcija == null) {
 				return;
@@ -45,7 +45,7 @@ public class KnjigaMeni {
 
 			switch (opcija) {
 			case 1:
-				ispisiSveKnjige(biblioteka.getListaKnjiga());
+				ispisiSveKnjige(biblioteka.getListOfBooks());
 				break;
 			case 2:
 				dodajKnjigu(biblioteka);
@@ -67,7 +67,7 @@ public class KnjigaMeni {
 				break;
 			case 8: {
 
-				Knjiga knjiga = pretragaPoIdu(biblioteka.getListaKnjiga());
+				Book knjiga = pretragaPoIdu(biblioteka.getListOfBooks());
 				if (knjiga == null) {
 					System.out.println("Trazena knjiga ne postoji.");
 				} else {
@@ -76,7 +76,7 @@ public class KnjigaMeni {
 				break;
 			}
 			case 9: {
-				List<Knjiga> trazeneKnjige = pretragaPoNazivu(biblioteka.getListaKnjiga());
+				List<Book> trazeneKnjige = pretragaPoNazivu(biblioteka.getListOfBooks());
 				if (trazeneKnjige.isEmpty()) {
 					System.out.println("Trazene knjige ne postoje.");
 				} else {
@@ -85,7 +85,7 @@ public class KnjigaMeni {
 				break;
 			}
 			case 10: {
-				List<Knjiga> trazeneKnjige = pretragaPoZanru(biblioteka.getListaKnjiga());
+				List<Book> trazeneKnjige = pretragaPoZanru(biblioteka.getListOfBooks());
 				if (trazeneKnjige.isEmpty()) {
 					System.out.println("Trazene knjige ne postoje.");
 				} else {
@@ -94,7 +94,7 @@ public class KnjigaMeni {
 				break;
 			}
 			case 11: {
-				List<Knjiga> trazeneKnjige = pretragaPoAutoru(biblioteka.getListaKnjiga(), biblioteka.getAutori());
+				List<Book> trazeneKnjige = pretragaPoAutoru(biblioteka.getListOfBooks(), biblioteka.getAutori());
 				if (trazeneKnjige.isEmpty()) {
 					System.out.println("Trazene knjige ne postoje.");
 				} else {
@@ -108,22 +108,22 @@ public class KnjigaMeni {
 
 	}
 
-	public static void ispisiSveKnjige(List<Knjiga> knjige) {
+	public static void ispisiSveKnjige(List<Book> knjige) {
 		for (int i = 0; i < knjige.size(); i++) {
 			System.out.println(i + 1 + ". " + knjige.get(i));
 		}
 	}
 
-	public static void dodajKnjigu(Biblioteka biblioteka) {
+	public static void dodajKnjigu(Library biblioteka) {
 
-		Knjiga knjiga = KnjigaValidacije.unosKnjige(null, biblioteka.getAutori());// ui
+		Book knjiga = KnjigaValidacije.unosKnjige(null, biblioteka.getAutori());// ui
 		dodavanjeKnjige(biblioteka.getSveKnjige(), knjiga);
 		System.out.println("Knjiga je uspesno dodata.");// ui
 
 	}
 
-	public static void obrisiKnjigu(Biblioteka biblioteka) {
-		Knjiga odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListaKnjiga(),biblioteka.getAutori());
+	public static void obrisiKnjigu(Library biblioteka) {
+		Book odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListOfBooks(),biblioteka.getAutori());
 		if (odabranaKnjiga == null) {
 			System.out.println("Knjiga nije pronadjena.");
 			return;
@@ -133,10 +133,10 @@ public class KnjigaMeni {
 		System.out.println("Knjiga je uspesno obrisana.");
 	}
 	
-	public static void uklanjanjeKnjige(HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige, Knjiga odabranaKnjiga) {
+	public static void uklanjanjeKnjige(HashMap<Genres, HashMap<Author, ArrayList<Book>>> sveKnjige, Book odabranaKnjiga) {
 		
-		HashMap<Autor, ArrayList<Knjiga>> autoriUzanru = sveKnjige.get(odabranaKnjiga.getZanr());
-		ArrayList<Knjiga> knjigeAutora = autoriUzanru.get(odabranaKnjiga.getAutor());
+		HashMap<Author, ArrayList<Book>> autoriUzanru = sveKnjige.get(odabranaKnjiga.getZanr());
+		ArrayList<Book> knjigeAutora = autoriUzanru.get(odabranaKnjiga.getAutor());
 			
 		knjigeAutora.remove(odabranaKnjiga);
 			
@@ -148,71 +148,71 @@ public class KnjigaMeni {
 		}
 	}
 	
-	public static void dodavanjeKnjige(HashMap<Zanrovi, HashMap<Autor, ArrayList<Knjiga>>> sveKnjige, Knjiga odabranaKnjiga) {
+	public static void dodavanjeKnjige(HashMap<Genres, HashMap<Author, ArrayList<Book>>> sveKnjige, Book odabranaKnjiga) {
 		
 		if (!sveKnjige.containsKey(odabranaKnjiga.getZanr())) {
-			HashMap<Autor, ArrayList<Knjiga>> noviAutori = new HashMap<Autor, ArrayList<Knjiga>>();
+			HashMap<Author, ArrayList<Book>> noviAutori = new HashMap<Author, ArrayList<Book>>();
 			sveKnjige.put(odabranaKnjiga.getZanr(), noviAutori);
 		}
 		
-		HashMap<Autor, ArrayList<Knjiga>> autoriIzZanra = sveKnjige.get(odabranaKnjiga.getZanr());
+		HashMap<Author, ArrayList<Book>> autoriIzZanra = sveKnjige.get(odabranaKnjiga.getZanr());
 		
 		if (!autoriIzZanra.containsKey(odabranaKnjiga.getAutor())) {
-			autoriIzZanra.put(odabranaKnjiga.getAutor(), new ArrayList<Knjiga>());
+			autoriIzZanra.put(odabranaKnjiga.getAutor(), new ArrayList<Book>());
 		}
 		
-		ArrayList<Knjiga> knjigeTogAutora = autoriIzZanra.get(odabranaKnjiga.getAutor());
+		ArrayList<Book> knjigeTogAutora = autoriIzZanra.get(odabranaKnjiga.getAutor());
 		knjigeTogAutora.add(odabranaKnjiga);
 
 	}
 
-	public static void izmeniNazivKnjige(Biblioteka biblioteka) {
-		Knjiga odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListaKnjiga(), biblioteka.getAutori());
+	public static void izmeniNazivKnjige(Library biblioteka) {
+		Book odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListOfBooks(), biblioteka.getAutori());
 		if (odabranaKnjiga == null) {
 			System.out.println("Knjiga nije pronadjena.");
 			return;
 		}
 
 		System.out.println("Unesite novi naziv knjige: ");
-		String noviNaziv = Validacije.unosTeksta(3, null);
+		String noviNaziv = Validation.textEntry(3, null);
 		odabranaKnjiga.setNaziv(noviNaziv);
 		System.out.println("Naziv je uspesno izmenjen.");
 	}
 
-	public static void izmeniBrojKopija(Biblioteka biblioteka) {
-		Knjiga odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListaKnjiga(), biblioteka.getAutori());
+	public static void izmeniBrojKopija(Library biblioteka) {
+		Book odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListOfBooks(), biblioteka.getAutori());
 		if (odabranaKnjiga == null) {
 			System.out.println("Knjiga nije pronadjena.");
 			return;
 		}
 		System.out.println("Unesite novi broj kopija knjige: ");
-		Integer brojKnjiga = Validacije.unosBroja(1, null);
+		Integer brojKnjiga = Validation.numberEntry(1, null);
 		odabranaKnjiga.setBrojKnjiga(brojKnjiga);
 		System.out.println("Broj kopija je uspesno izmenjen.");
 
 		
 	}
 
-	public static void izmeniZanr(Biblioteka biblioteka) {
-		Knjiga odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListaKnjiga(), biblioteka.getAutori());
+	public static void izmeniZanr(Library biblioteka) {
+		Book odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListOfBooks(), biblioteka.getAutori());
 		if (odabranaKnjiga == null) {
 			System.out.println("Knjiga nije pronadjena.");
 			return;
 		}
-		Zanrovi noviZanr = ZanroviValidacije.odabirZanra();
+		Genres noviZanr = ZanroviValidacije.odabirZanra();
 		uklanjanjeKnjige(biblioteka.getSveKnjige(), odabranaKnjiga);
 		odabranaKnjiga.setZanr(noviZanr);
 		dodavanjeKnjige(biblioteka.getSveKnjige(), odabranaKnjiga);
 		
 	}
 
-	public static void izmeniAutora(Biblioteka biblioteka) {
-		Knjiga odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListaKnjiga(), biblioteka.getAutori());
+	public static void izmeniAutora(Library biblioteka) {
+		Book odabranaKnjiga = odabirPretrageKnjige(biblioteka.getListOfBooks(), biblioteka.getAutori());
 		if (odabranaKnjiga == null) {
 			System.out.println("Knjiga nije pronadjena.");
 			return;
 		}
-		Autor noviAutor = AutorValidacije.izborAutora(biblioteka.getAutori());
+		Author noviAutor = AutorValidacije.izborAutora(biblioteka.getAutori());
 		uklanjanjeKnjige(biblioteka.getSveKnjige(), odabranaKnjiga);
 		odabranaKnjiga.setAutor(noviAutor);
 		dodavanjeKnjige(biblioteka.getSveKnjige(), odabranaKnjiga);
@@ -220,10 +220,10 @@ public class KnjigaMeni {
 		
 	}
 
-	public static Knjiga pretragaPoIdu(List<Knjiga> knjige) {
+	public static Book pretragaPoIdu(List<Book> knjige) {
 		System.out.println("Unesite ID knjige:");
-		Integer id = Validacije.unosBroja(1, null);
-		for (Knjiga knjiga : knjige) {
+		Integer id = Validation.numberEntry(1, null);
+		for (Book knjiga : knjige) {
 			if (knjiga.getIdKnjige() == id) {
 				return knjiga;
 			}
@@ -232,12 +232,12 @@ public class KnjigaMeni {
 		return null;
 	}
 
-	public static List<Knjiga> pretragaPoNazivu(List<Knjiga> knjige) {
+	public static List<Book> pretragaPoNazivu(List<Book> knjige) {
 		System.out.println("Unesite naziv knjige: ");
-		String naziv = Validacije.unosTeksta(3, null);
+		String naziv = Validation.textEntry(3, null);
 
-		ArrayList<Knjiga> trazeneKnjige = new ArrayList<Knjiga>();
-		for (Knjiga knjiga : knjige) {
+		ArrayList<Book> trazeneKnjige = new ArrayList<Book>();
+		for (Book knjiga : knjige) {
 			if (knjiga.getNaziv().toLowerCase().contains(naziv.toLowerCase())) {
 				trazeneKnjige.add(knjiga);
 
@@ -247,12 +247,12 @@ public class KnjigaMeni {
 		return trazeneKnjige;
 	}
 
-	public static List<Knjiga> pretragaPoZanru(List<Knjiga> knjige) {
-		Zanrovi odabrani = ZanroviValidacije.odabirZanra();// ui
+	public static List<Book> pretragaPoZanru(List<Book> knjige) {
+		Genres odabrani = ZanroviValidacije.odabirZanra();// ui
 
 		// servisni sloj
-		ArrayList<Knjiga> trazeneKnjige = new ArrayList<Knjiga>();
-		for (Knjiga knjiga : knjige) {
+		ArrayList<Book> trazeneKnjige = new ArrayList<Book>();
+		for (Book knjiga : knjige) {
 			if (knjiga.getZanr().equals(odabrani)) {
 				trazeneKnjige.add(knjiga);
 			}
@@ -268,12 +268,12 @@ public class KnjigaMeni {
 
 	}
 
-	public static List<Knjiga> pretragaPoAutoru(List<Knjiga> knjige, List<Autor> autori) {
-		Autor odabraniAutor = AutorValidacije.izborAutora(autori);
+	public static List<Book> pretragaPoAutoru(List<Book> knjige, List<Author> autori) {
+		Author odabraniAutor = AutorValidacije.izborAutora(autori);
 
-		ArrayList<Knjiga> trazeneKnjige = new ArrayList<Knjiga>();
+		ArrayList<Book> trazeneKnjige = new ArrayList<Book>();
 
-		for (Knjiga knjiga : knjige) {
+		for (Book knjiga : knjige) {
 			if (knjiga.getAutor().getId() == odabraniAutor.getId()) {
 				trazeneKnjige.add(knjiga);
 			}
@@ -282,7 +282,7 @@ public class KnjigaMeni {
 
 	}
 
-	public static Knjiga odabirPretrageKnjige(List<Knjiga> knjige, List<Autor> autori) {
+	public static Book odabirPretrageKnjige(List<Book> knjige, List<Author> autori) {
 		while (true) {
 			System.out.println("1. Pretraga knjige po ID u: ");
 			System.out.println("2. Pretraga knjige po zanru: ");
@@ -291,38 +291,38 @@ public class KnjigaMeni {
 			System.out.println("   Unesite broj za pretragu: ");
 			System.out.println(" x izlaz");
 
-			Integer opcija = Validacije.unosBroja(1, 4);
+			Integer opcija = Validation.numberEntry(1, 4);
 			if (opcija == null) {
 				return null;
 			}
 			switch (opcija) {
 			case 1: {
-				Knjiga trazenaKnjiga = pretragaPoIdu(knjige);
+				Book trazenaKnjiga = pretragaPoIdu(knjige);
 				return trazenaKnjiga;
 			}
 			case 2: {
-				List<Knjiga> trezeneKnjige = pretragaPoZanru(knjige);
-				Knjiga nadjena = odabirKnjige(trezeneKnjige);
+				List<Book> trezeneKnjige = pretragaPoZanru(knjige);
+				Book nadjena = odabirKnjige(trezeneKnjige);
 				return nadjena;
 			}
 			case 3: {
-				List<Knjiga> trazeneKnjige = pretragaPoNazivu(knjige);
-				Knjiga nadjena = odabirKnjige(trazeneKnjige);
+				List<Book> trazeneKnjige = pretragaPoNazivu(knjige);
+				Book nadjena = odabirKnjige(trazeneKnjige);
 				return nadjena;
 			}
 			case 4: {
-				List<Knjiga> trazeneKnjige = pretragaPoAutoru(knjige, autori);
-				Knjiga nadjena = odabirKnjige(trazeneKnjige);
+				List<Book> trazeneKnjige = pretragaPoAutoru(knjige, autori);
+				Book nadjena = odabirKnjige(trazeneKnjige);
 				return nadjena;
 			}
 			}
 		}
 	}
 
-	public static Knjiga odabirKnjige(List<Knjiga> knjige) {
+	public static Book odabirKnjige(List<Book> knjige) {
 		ispisiSveKnjige(knjige);
 		System.out.println("Odaberite broj knjige: ");
-		Integer izbor = Validacije.unosBroja(1, knjige.size());
+		Integer izbor = Validation.numberEntry(1, knjige.size());
 		return knjige.get(izbor - 1);
 	}
 

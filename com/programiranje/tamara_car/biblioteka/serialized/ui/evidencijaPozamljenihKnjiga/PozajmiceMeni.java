@@ -4,18 +4,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
-import programiranje.tamara_car.biblioteka.serialized.model.Clan;
-import programiranje.tamara_car.biblioteka.serialized.model.Knjiga;
-import programiranje.tamara_car.biblioteka.serialized.model.Pozajmica;
-import programiranje.tamara_car.biblioteka.serialized.model.Zaposleni;
+import programiranje.tamara_car.biblioteka.serialized.model.Library;
+import programiranje.tamara_car.biblioteka.serialized.model.Member;
+import programiranje.tamara_car.biblioteka.serialized.model.Book;
+import programiranje.tamara_car.biblioteka.serialized.model.Loan;
+import programiranje.tamara_car.biblioteka.serialized.model.Librarian;
 import programiranje.tamara_car.biblioteka.serialized.ui.ClanMeni;
 import programiranje.tamara_car.biblioteka.serialized.ui.ZaposleniMeni;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validacije;
+import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
 
 public class PozajmiceMeni {
 
-	public static void pozajmiceMeni(Biblioteka biblioteka) {
+	public static void pozajmiceMeni(Library biblioteka) {
 		while (true) {
 			System.out.println("----Upravljanje pozajmicama----");
 			System.out.println("1.Listaj sve pozajmice ");
@@ -24,24 +24,24 @@ public class PozajmiceMeni {
 			System.out.println("4.Razduzi pozajmicu ");
 			System.out.println(" x izlaz ");
 
-			Integer opcija = Validacije.unosBroja(1, 4);
+			Integer opcija = Validation.numberEntry(1, 4);
 			if (opcija == null) {
 				return;
 			}
 			switch (opcija) {
 			case 1: {
-				List<Pozajmica> trazene = biblioteka.getEvidencijaKnjiga();
+				List<Loan> trazene = biblioteka.getEvidencijaKnjiga();
 				if (trazene.isEmpty()) {
 					System.out.println("Trenutno nema pozajmica.");
 				} else {
-					for (Pozajmica pozajmica : trazene) {
+					for (Loan pozajmica : trazene) {
 						System.out.println(pozajmica);
 					}
 				}
 				break;
 			}
 			case 2: {
-				Pozajmica trazena = nadjiPoClanu(biblioteka);
+				Loan trazena = nadjiPoClanu(biblioteka);
 				if (trazena != null) {
 					System.out.println(trazena);
 				} else {
@@ -58,30 +58,30 @@ public class PozajmiceMeni {
 		}
 	}
 
-	public static void kreirajPozajmicu(Biblioteka biblioteka) {
+	public static void kreirajPozajmicu(Library biblioteka) {
 		System.out.println("Odaberite zaposlenog: ");
-		Zaposleni odabraniZaposleni = ZaposleniMeni.odabirZaposlenog(biblioteka.getZaposleni());
+		Librarian odabraniZaposleni = ZaposleniMeni.odabirZaposlenog(biblioteka.getZaposleni());
 		if (odabraniZaposleni == null) {
 			System.out.println("Prekida se kreiranje pozajmice");
 			return;
 		}
 		
 		System.out.println("Odaberite clana: ");
-		Clan odabraniClan = ClanMeni.odabirClana(biblioteka.getClanovi());
+		Member odabraniClan = ClanMeni.odabirClana(biblioteka.getClanovi());
 		if (odabraniClan == null) {
 			System.out.println("Prekida se kreiranje pozajmice");
 			return;
 		}
 		
 		System.out.println("Unesite datum pozajmice: ");
-		LocalDate datum = Validacije.parsiranDatum();
+		LocalDate datum = Validation.parsedDate();
 		System.out.println("Unesite duzinu pozajmice: ");
-		Integer duzinaPozajmice = Validacije.unosBroja(1, null);
+		Integer duzinaPozajmice = Validation.numberEntry(1, null);
 
-		Pozajmica novaPozajmica = new Pozajmica(odabraniZaposleni, odabraniClan, duzinaPozajmice, datum,
-				new ArrayList<Knjiga>());
+		Loan novaPozajmica = new Loan(odabraniZaposleni, odabraniClan, duzinaPozajmice, datum,
+				new ArrayList<Book>());
 
-		Pozajmica zavrsena = DodavanjePozajmiceMeni.kreirajNovuPozajmicu(novaPozajmica, biblioteka);
+		Loan zavrsena = DodavanjePozajmiceMeni.kreirajNovuPozajmicu(novaPozajmica, biblioteka);
 		if (zavrsena == null) {
 			System.out.println("Prekida se kreiranje pozajmice");
 			return;
@@ -92,12 +92,12 @@ public class PozajmiceMeni {
 
 	}
 
-	public static Pozajmica nadjiPoClanu(Biblioteka biblioteka) {
-		Clan odabir = ClanMeni.odabirClana(biblioteka.getClanovi());
+	public static Loan nadjiPoClanu(Library biblioteka) {
+		Member odabir = ClanMeni.odabirClana(biblioteka.getClanovi());
 		if (odabir == null) {
 			return null;
 		}
-		for (Pozajmica trenutna : biblioteka.getEvidencijaKnjiga()) {
+		for (Loan trenutna : biblioteka.getEvidencijaKnjiga()) {
 			if (odabir.getId() == trenutna.getPozajmio().getId()) {
 				return trenutna;
 			}

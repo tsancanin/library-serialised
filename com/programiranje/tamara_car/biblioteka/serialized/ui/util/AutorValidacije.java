@@ -2,32 +2,32 @@ package programiranje.tamara_car.biblioteka.serialized.ui.util;
 
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Autor;
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
+import programiranje.tamara_car.biblioteka.serialized.model.Author;
+import programiranje.tamara_car.biblioteka.serialized.model.Library;
 
 public class AutorValidacije {
 
-	public static Autor izborAutora(List<Autor> autori) {
+	public static Author izborAutora(List<Author> autori) {
 
 		System.out.println("Odaberite redni broj autora: ");
 		for (int i = 0; i < autori.size(); i++) {
 			System.out.println(i + 1 + ". " + autori.get(i));
 		}
-		Integer izbor = Validacije.unosBroja(1, autori.size());
+		Integer izbor = Validation.numberEntry(1, autori.size());
 		return autori.get(izbor - 1);
 	}
 
-	public static Autor dodajAutora() {
+	public static Author dodajAutora() {
 
 		System.out.println("Unesite id: ");
-		int id = Validacije.unosBroja(1, null);
+		int id = Validation.numberEntry(1, null);
 		
 		System.out.println("Unesite ime autora: ");
-		String ime = Validacije.unosTeksta(3, null);
+		String ime = Validation.textEntry(3, null);
 
 		System.out.println("Unesite prezime autora: ");
-		String prezime = Validacije.unosTeksta(3, null);
-		Autor autor = new Autor(id, ime, prezime);
+		String prezime = Validation.textEntry(3, null);
+		Author autor = new Author(id, ime, prezime);
 		return autor;
 	}
 

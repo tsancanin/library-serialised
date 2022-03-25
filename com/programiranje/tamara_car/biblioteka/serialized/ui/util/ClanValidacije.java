@@ -2,49 +2,49 @@ package programiranje.tamara_car.biblioteka.serialized.ui.util;
 
 import java.time.LocalDate;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Clan;
+import programiranje.tamara_car.biblioteka.serialized.model.Member;
 
 public class ClanValidacije {
 
-	public static Clan unosPodataka(Clan clan) {
-		Clan izmenjeniClan = clan;
+	public static Member unosPodataka(Member clan) {
+		Member izmenjeniClan = clan;
 
 		if (izmenjeniClan == null) {
-			izmenjeniClan = new Clan();
+			izmenjeniClan = new Member();
 			System.out.println("Unesite ID clana: ");
-			Integer idClana = Validacije.unosBroja(1, null);
+			Integer idClana = Validation.numberEntry(1, null);
 			izmenjeniClan.setId(idClana);
 		}
 		System.out.println("Unesite clanski broj: ");
-		int clanskiBroj = Validacije.unosBroja(1, null);
+		int clanskiBroj = Validation.numberEntry(1, null);
 		izmenjeniClan.setClanskiBroj(clanskiBroj);
 		System.out.println("Unesite ime clana: ");
-		String ime = Validacije.unosTeksta(3, null);
+		String ime = Validation.textEntry(3, null);
 		izmenjeniClan.setIme(ime);
 		System.out.println("Unesite prezime clana: ");
-		String prezime = Validacije.unosTeksta(3, null);
+		String prezime = Validation.textEntry(3, null);
 		izmenjeniClan.setPrezime(prezime);
 		System.out.println("Unesite datum rodjenja clana: ");
-		LocalDate parsirani = Validacije.parsiranDatum();
+		LocalDate parsirani = Validation.parsedDate();
 		izmenjeniClan.setDatumRodjenja(parsirani);
 		System.out.println("Unesite adresu clana: ");
-		String adresa = Validacije.unosTeksta(3, null);
+		String adresa = Validation.textEntry(3, null);
 		izmenjeniClan.setAdresa(adresa);
 		System.out.println("Unesite clanov broj telefona: ");
-		int brojtelefona = Validacije.unosBroja(3, null);
+		int brojtelefona = Validation.numberEntry(3, null);
 		izmenjeniClan.setBrojTelefona(brojtelefona);
 		System.out.println("Unesite mail adresu clana: ");
-		String mail = Validacije.proveraMaila();
+		String mail = Validation.proveraMaila();
 		izmenjeniClan.setMail(mail);
 
 		return izmenjeniClan;
 	}
 
-	public static Clan izmenaClana(Clan clan) {
+	public static Member izmenaClana(Member clan) {
 		return unosPodataka(clan);
 	}
 
-	public static Clan dodajClana() {
+	public static Member dodajClana() {
 		return unosPodataka(null);
 	}
 

@@ -4,45 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Autor;
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
+import programiranje.tamara_car.biblioteka.serialized.model.Author;
+import programiranje.tamara_car.biblioteka.serialized.model.Library;
 import programiranje.tamara_car.biblioteka.serialized.ui.util.AutorValidacije;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validacije;
+import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
 
-public class AutorMeni {
+public class AuthorMenu {
 	public static Scanner in = new Scanner(System.in);
 
-	public static void autorMeni(Biblioteka biblioteka) {
+	public static void autorMeni(Library library) {
 
 		while (true) {
-			System.out.println("-----Autor meni------");
-			System.out.println("1.Ispis svih autora: ");
-			System.out.println("2.Dodaj novog autora: ");
+			System.out.println("-----Author menu------");
+			System.out.println("1.List all authors: ");
+			System.out.println("2.Add new author: ");
 			System.out.println("3.Obrisi autora: ");
-			System.out.println("4.Pretraga autora po imenu i prezimenu: "); 
-			System.out.println("5.Pretraga autora po ID u: ");
-			System.out.println(" X - izlaz ");
+			System.out.println("4.Search by name and surname: "); 
+			System.out.println("5.Search by ID: ");
+			System.out.println(" X - exit ");
 
-			Integer opcija = Validacije.unosBroja(1, 5);
+			Integer option = Validation.numberEntry(1, 5);
 
-			if (opcija == null) {
+			if (option == null) {
 				return;
 			}
 
-			switch (opcija) {
+			switch (option) {
 			case 1:
-				ispisSvihAutora(biblioteka);
+				listAllAuthor(library);
 				break;
 			case 2:
-				dodajAutora(biblioteka);
+				dodajAutora(library);
 				break;
 			case 3:
-				obrisiAutora(biblioteka);
+				obrisiAutora(library);
 				break;
 			case 4: {
-				List<Autor> trazeni = pretragaPoImenuIprezimenu(biblioteka.getAutori());
+				List<Author> trazeni = pretragaPoImenuIprezimenu(library.getAuthor());
 				if (trazeni.size() > 0) {
-					for (Autor autor : trazeni) {
+					for (Author autor : trazeni) {
 						System.out.println(autor);
 					}
 				} else {
@@ -51,7 +51,7 @@ public class AutorMeni {
 				break;
 			}
 			case 5: {
-				Autor trazeni = pretragaPoIDu(biblioteka.getAutori());
+				Author trazeni = pretragaPoIDu(library.getAuthor());
 				if (trazeni != null) {
 					System.out.println(trazeni);
 				} else {
@@ -63,22 +63,22 @@ public class AutorMeni {
 	   }
 	}
 
-	public static void ispisSvihAutora(Biblioteka biblioteka) {
-		System.out.println("Spisak autora: ");
-		for (Autor autor : biblioteka.getAutori()) {
-			System.out.println(autor);
+	public static void listAllAuthor(Library library) {
+		System.out.println("List of Autors: ");
+		for (Author author : library.getAuthor()) {
+			System.out.println(author);
 		}
 	}
 
-	public static void dodajAutora(Biblioteka biblioteka) {
+	public static void dodajAutora(Library biblioteka) {
 		// ucitaj sve o autoru sa tastature
-		Autor autor = AutorValidacije.dodajAutora();
+		Author autor = AutorValidacije.dodajAutora();
 		do {
 			// pretpostavi da je trenutni id ok
 			boolean nadjen = false;
 
 			// prodji kroz sve autore
-			for (Autor trenutni : biblioteka.getAutori()) {
+			for (Author trenutni : biblioteka.getAuthor()) {
 				// ako je id zapravo zauzet, zapamti to u "nadjen"
 				nadjen = trenutni.getId() == autor.getId();
 				if (nadjen)
@@ -90,7 +90,7 @@ public class AutorMeni {
 				// vec uneo
 				// ovo izbegava scenario da mora ponovo da unosi celog autora
 				System.out.println("Id je zauzet. Unesite novi id");
-				Integer noviId = Validacije.unosBroja(1, null);
+				Integer noviId = Validation.numberEntry(1, null);
 
 				autor.setId(noviId);
 				// u if grani nema break, sto znaci da ces se wratiti u do-while
@@ -102,19 +102,19 @@ public class AutorMeni {
 
 		// ovde sigurno imas valjanog autora sa dobrim id-em, pa mozes bezbedno da ga
 		// dodas
-		biblioteka.getAutori().add(autor);
+		biblioteka.getAuthor().add(autor);
 		System.out.println("Autor je uspesno dodat!");
 
 	}
 
-	public static void obrisiAutora(Biblioteka biblioteka) {
+	public static void obrisiAutora(Library biblioteka) {
 		System.out.println("Unesite id autora:");
-		int id = Validacije.unosBroja(1, null);
+		int id = Validation.numberEntry(1, null);
 
 		boolean nadjen = false;
-		for (Autor zaBrisanje : biblioteka.getAutori()) {
+		for (Author zaBrisanje : biblioteka.getAuthor()) {
 			if (zaBrisanje.getId() == id) {
-				biblioteka.getAutori().remove(zaBrisanje);
+				biblioteka.getAuthor().remove(zaBrisanje);
 				System.out.println("autor je obrisan.");
 				return;
 			}
@@ -125,13 +125,13 @@ public class AutorMeni {
 		}
 	}
 
-	public static List<Autor> pretragaPoImenuIprezimenu(List<Autor> autori) {
+	public static List<Author> pretragaPoImenuIprezimenu(List<Author> autori) {
 		System.out.println("Unesite tekst za pretragu: ");
-		String unos = Validacije.unosTeksta(3, null);
+		String unos = Validation.textEntry(3, null);
 
-		List<Autor> nova = new ArrayList<Autor>();
-		for (Autor autor : autori) {
-			if (autor.getIme().contains(unos) || autor.getPrezime().contains(unos)) {
+		List<Author> nova = new ArrayList<Author>();
+		for (Author autor : autori) {
+			if (autor.getName().contains(unos) || autor.getSurname().contains(unos)) {
 				nova.add(autor);
 			}
 		}
@@ -139,11 +139,11 @@ public class AutorMeni {
 
 	}
 
-	public static Autor pretragaPoIDu(List<Autor> autori) {
+	public static Author pretragaPoIDu(List<Author> autori) {
 		System.out.println("Unesite id: ");
-		int id = Validacije.unosBroja(1, null);
+		int id = Validation.numberEntry(1, null);
 
-		for (Autor autor : autori) {
+		for (Author autor : autori) {
 			if (autor.getId() == id) {
 				return autor;
 			}

@@ -2,28 +2,28 @@ package programiranje.tamara_car.biblioteka.serialized.ui.util;
 
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Autor;
-import programiranje.tamara_car.biblioteka.serialized.model.Knjiga;
-import programiranje.tamara_car.biblioteka.serialized.model.Zanrovi;
+import programiranje.tamara_car.biblioteka.serialized.model.Author;
+import programiranje.tamara_car.biblioteka.serialized.model.Book;
+import programiranje.tamara_car.biblioteka.serialized.model.Genres;
 
 public class KnjigaValidacije {
-	public static Knjiga unosKnjige(Integer id,List<Autor>autori) {
+	public static Book unosKnjige(Integer id,List<Author>autori) {
 		Integer idKnjige = id;
 		if(idKnjige==null) {
 			System.out.println("Unesite ID knjige: ");
-			 idKnjige = Validacije.unosBroja(1,null);
+			 idKnjige = Validation.numberEntry(1,null);
 		}
 		System.out.println("Unesite naziv knjige: ");
-		String nazivKnjige = Validacije.unosTeksta(1, 250);
+		String nazivKnjige = Validation.textEntry(1, 250);
 		
-		Autor autor = AutorValidacije.izborAutora(autori);
+		Author autor = AutorValidacije.izborAutora(autori);
 		
-		Zanrovi zanr = ZanroviValidacije.odabirZanra();
+		Genres zanr = ZanroviValidacije.odabirZanra();
 		
 		System.out.println("Broj knjiga u biblioteci: ");
-		Integer brKnjiga = Validacije.unosBroja(1, null);
+		Integer brKnjiga = Validation.numberEntry(1, null);
 		
-		return new Knjiga(idKnjige, nazivKnjige, autor, zanr, brKnjiga);
+		return new Book(idKnjige, nazivKnjige, autor, zanr, brKnjiga);
 	}
 	
 	

@@ -2,7 +2,7 @@ package programiranje.tamara_car.biblioteka.serialized.model;
 
 import java.time.LocalDate;
 
-public abstract class VaznaOsoba extends Osoba{
+public abstract class ImportantPerson extends Person{
 	/**
 	 * 
 	 */
@@ -12,11 +12,11 @@ public abstract class VaznaOsoba extends Osoba{
 	private int brojTelefona;
 	private String mail;
 	
-	public VaznaOsoba() {
+	public ImportantPerson() {
 		super();
 	}
 	
-	public VaznaOsoba(int id, String ime, String prezime, LocalDate datumRodjenja, String adresa,int brojTelefona, String mail) {
+	public ImportantPerson(int id, String ime, String prezime, LocalDate datumRodjenja, String adresa,int brojTelefona, String mail) {
 		super(id, ime, prezime);
 		this.datumRodjenja = datumRodjenja;
 		this.adresa = adresa;

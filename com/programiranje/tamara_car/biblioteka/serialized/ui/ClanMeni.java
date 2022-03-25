@@ -3,14 +3,14 @@ package programiranje.tamara_car.biblioteka.serialized.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Biblioteka;
-import programiranje.tamara_car.biblioteka.serialized.model.Clan;
+import programiranje.tamara_car.biblioteka.serialized.model.Library;
+import programiranje.tamara_car.biblioteka.serialized.model.Member;
 import programiranje.tamara_car.biblioteka.serialized.ui.util.ClanValidacije;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validacije;
+import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
 
 public class ClanMeni {
 
-	public static void clanMeni(Biblioteka biblioteka) {
+	public static void clanMeni(Library biblioteka) {
 
 		while (true) {
 			System.out.println("---Clan meni---");
@@ -22,7 +22,7 @@ public class ClanMeni {
 			System.out.println("6. Pretraga clanova po imenu i prezimenu: ");
 			System.out.println(" X - izlaz");
 
-			Integer opcija = Validacije.unosBroja(1, 6);
+			Integer opcija = Validation.numberEntry(1, 6);
 
 			if (opcija == null) {
 				return;
@@ -35,7 +35,7 @@ public class ClanMeni {
 				dodajNovogClana(biblioteka);
 				break;
 			case 3: {
-				Clan trazeni = odabirClana(biblioteka.getClanovi());
+				Member trazeni = odabirClana(biblioteka.getClanovi());
 				if (trazeni != null) {
 					ClanValidacije.izmenaClana(trazeni);
 					System.out.println("Clan uspesno izmenjen");
@@ -45,7 +45,7 @@ public class ClanMeni {
 				break;
 			}
 			case 4: {
-				Clan trazeni = odabirClana(biblioteka.getClanovi());
+				Member trazeni = odabirClana(biblioteka.getClanovi());
 				if (trazeni == null) {
 					System.out.println("Trazeni clan ne postoji.");
 				} else {
@@ -55,7 +55,7 @@ public class ClanMeni {
 				break;
 			}
 			case 5: {
-				Clan trazeni = pretragaPoClanskomBroju(biblioteka.getClanovi());
+				Member trazeni = pretragaPoClanskomBroju(biblioteka.getClanovi());
 				if (trazeni != null) {
 					System.out.println(trazeni);
 				} else {
@@ -65,7 +65,7 @@ public class ClanMeni {
 			}
 			case 6:
 			{	 
-				List<Clan> nadjeni =pretragaPoImenuIprezimenu(biblioteka.getClanovi());
+				List<Member> nadjeni =pretragaPoImenuIprezimenu(biblioteka.getClanovi());
 				if(nadjeni.isEmpty()) {
 					System.out.println("Trazeni clan ne postoji.");
 				}else {
@@ -79,25 +79,25 @@ public class ClanMeni {
 
 	}
 
-	public static void ispisSvihClanova(Biblioteka biblioteka) {
-		for (Clan clan : biblioteka.getClanovi()) {
+	public static void ispisSvihClanova(Library biblioteka) {
+		for (Member clan : biblioteka.getClanovi()) {
 			System.out.println(clan);
 		}
 	}
 
-	public static void dodajNovogClana(Biblioteka biblioteka) {
-		Clan noviClan = ClanValidacije.dodajClana();
+	public static void dodajNovogClana(Library biblioteka) {
+		Member noviClan = ClanValidacije.dodajClana();
 
 		do {
 			boolean nadjen = false;
-			for (Clan trazeni : biblioteka.getClanovi()) {
+			for (Member trazeni : biblioteka.getClanovi()) {
 				nadjen = trazeni.getId() == noviClan.getId();
 				if (nadjen)
 					break;
 			}
 			if (nadjen) {
 				System.out.println("ID je zauzet. Unesite novi ID: ");
-				Integer noviId = Validacije.unosBroja(1, null);
+				Integer noviId = Validation.numberEntry(1, null);
 				noviClan.setId(noviId);
 			} else {
 				break;
@@ -109,11 +109,11 @@ public class ClanMeni {
 		System.out.println("Novi clan je uspesno dodat!");
 	}
 
-	public static Clan pretragaPoClanskomBroju(List<Clan> clanovi) {
+	public static Member pretragaPoClanskomBroju(List<Member> clanovi) {
 		System.out.println("Unesite broj clanske kartice: ");
-		int id = Validacije.unosBroja(1, null);
+		int id = Validation.numberEntry(1, null);
 
-		for (Clan trazeniClan : clanovi) {
+		for (Member trazeniClan : clanovi) {
 			if (trazeniClan.getClanskiBroj() == id) {
 				return trazeniClan;
 			}
@@ -121,12 +121,12 @@ public class ClanMeni {
 		return null;
 	}
 
-	public static List<Clan> pretragaPoImenuIprezimenu(List<Clan> clanovi) {
+	public static List<Member> pretragaPoImenuIprezimenu(List<Member> clanovi) {
 		
 		System.out.println("Unesite tekst za pretragu: ");
-		String tekst = Validacije.unosTeksta(3, null);
-		List<Clan> filtrirani = new ArrayList<Clan>();
-		for (Clan clan : clanovi) {
+		String tekst = Validation.textEntry(3, null);
+		List<Member> filtrirani = new ArrayList<Member>();
+		for (Member clan : clanovi) {
 			if (
 					clan.getIme().toLowerCase().contains(tekst.toLowerCase()) 
 					|| clan.getPrezime().toLowerCase().contains(tekst.toLowerCase())
@@ -138,12 +138,12 @@ public class ClanMeni {
 		return filtrirani;
 	}
 
-	public static Clan odabirClana(List<Clan> clanovi) {
+	public static Member odabirClana(List<Member> clanovi) {
 
 		System.out.println("1. Pretraga clana po ID u: ");
 		System.out.println("2. Pretraga clana po imenu i prezimenu: ");
 
-		Integer opcija = Validacije.unosBroja(1, 2);
+		Integer opcija = Validation.numberEntry(1, 2);
 		if (opcija == 1) {
 			return pretragaPoClanskomBroju(clanovi);
 
@@ -153,16 +153,16 @@ public class ClanMeni {
 
 	}
 
-	public static Clan odabirClanaPoImenuIprezimenu(List<Clan> clanovi) {
+	public static Member odabirClanaPoImenuIprezimenu(List<Member> clanovi) {
 
-		List<Clan> nadjeni = pretragaPoImenuIprezimenu(clanovi);
+		List<Member> nadjeni = pretragaPoImenuIprezimenu(clanovi);
 
 		for (int i = 0; i < nadjeni.size(); i++) {
 			System.out.println(i + 1 + ". " + nadjeni.get(i));
 		}
 
 		System.out.println("Odaberite clana(unesite broj): ");
-		Integer odabir = Validacije.unosBroja(1, nadjeni.size());
+		Integer odabir = Validation.numberEntry(1, nadjeni.size());
 
 		return nadjeni.get(odabir - 1);
 	}
