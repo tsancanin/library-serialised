@@ -2,51 +2,52 @@ package programiranje.tamara_car.biblioteka.serialized.model;
 
 import java.time.LocalDate;
 
-public abstract class ImportantPerson extends Person{
+public abstract class ImportantPerson extends Person {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2352707807405598460L;
-	private LocalDate datumRodjenja;
-	private String adresa;
-	private int brojTelefona;
+	private LocalDate birthday;
+	private String address;
+	private int phoneNumber;
 	private String mail;
-	
+
 	public ImportantPerson() {
 		super();
 	}
-	
-	public ImportantPerson(int id, String ime, String prezime, LocalDate datumRodjenja, String adresa,int brojTelefona, String mail) {
-		super(id, ime, prezime);
-		this.datumRodjenja = datumRodjenja;
-		this.adresa = adresa;
-		this.brojTelefona = brojTelefona;
+
+	public ImportantPerson(int id, String name, String surname, LocalDate birthday, String address, int phoneNumber,
+			String mail) {
+		super(id, name, surname);
+		this.birthday = birthday;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
 		this.mail = mail;
-		
+
 	}
 
-	public LocalDate getDatumRodjenja() {
-		return datumRodjenja;
+	public LocalDate getBirthday() {
+		return birthday;
 	}
 
-	public void setDatumRodjenja(LocalDate datumRodjenja) {
-		this.datumRodjenja = datumRodjenja;
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
 	}
 
-	public String getAdresa() {
-		return adresa;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdresa(String adresa) {
-		this.adresa = adresa;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public int getBrojTelefona() {
-		return brojTelefona;
+	public int getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setBrojTelefona(int brojTelefona) {
-		this.brojTelefona = brojTelefona;
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getMail() {
@@ -59,16 +60,8 @@ public abstract class ImportantPerson extends Person{
 
 	@Override
 	public String toString() {
-		return (
-			super.toString()
-			+ "\n| datumRodjenja=" + datumRodjenja 
-			+ ",\n| adresa=" + adresa 
-			+ ",\n| brojTelefona=" + brojTelefona
-			+ ",\n| mail=" + mail
-		);
+		return (super.toString() + ",\n| datumRodjenja=" + birthday + ",\n| adresa=" + address + ",\n| brojTelefona="
+				+ phoneNumber + ",\n| mail=" + mail);
 	}
-	
-	
-	
-	
+
 }

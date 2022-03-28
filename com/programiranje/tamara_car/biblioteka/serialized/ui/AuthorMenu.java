@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import programiranje.tamara_car.biblioteka.serialized.model.Author;
 import programiranje.tamara_car.biblioteka.serialized.model.Library;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.AutorValidacije;
+import programiranje.tamara_car.biblioteka.serialized.ui.util.AuthorValidation;
 import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
 
 public class AuthorMenu {
@@ -18,8 +18,8 @@ public class AuthorMenu {
 			System.out.println("-----Author menu------");
 			System.out.println("1.List all authors: ");
 			System.out.println("2.Add new author: ");
-			System.out.println("3.Obrisi autora: ");
-			System.out.println("4.Search by name and surname: "); 
+			System.out.println("3.Delete author: ");
+			System.out.println("4.Search by name and surname: ");
 			System.out.println("5.Search by ID: ");
 			System.out.println(" X - exit ");
 
@@ -34,65 +34,65 @@ public class AuthorMenu {
 				listAllAuthor(library);
 				break;
 			case 2:
-				dodajAutora(library);
+				addAuthor(library);
 				break;
 			case 3:
-				obrisiAutora(library);
+				deleteAuthor(library);
 				break;
 			case 4: {
-				List<Author> trazeni = pretragaPoImenuIprezimenu(library.getAuthor());
-				if (trazeni.size() > 0) {
-					for (Author autor : trazeni) {
-						System.out.println(autor);
+				List<Author> searchedAuthor = searchByNameAndSurname(library.getAuthors());
+				if (searchedAuthor.size() > 0) {
+					for (Author author : searchedAuthor) {
+						System.out.println(author);
 					}
 				} else {
-					System.out.println("Ne postoji autor sa unetim tekstom.");
+					System.out.println("The author was not found.");
 				}
 				break;
 			}
 			case 5: {
-				Author trazeni = pretragaPoIDu(library.getAuthor());
-				if (trazeni != null) {
-					System.out.println(trazeni);
+				Author searchedAuthor = searchById(library.getAuthors());
+				if (searchedAuthor != null) {
+					System.out.println(searchedAuthor);
 				} else {
-					System.out.println("Ne postoji autor sa trazenim ID-em.");
+					System.out.println("Author does not exist whith this ID.");
 				}
 				break;
 			}
-		  }
-	   }
+			}
+		}
 	}
 
 	public static void listAllAuthor(Library library) {
 		System.out.println("List of Autors: ");
-		for (Author author : library.getAuthor()) {
+		for (Author author : library.getAuthors()) {
 			System.out.println(author);
 		}
 	}
 
-	public static void dodajAutora(Library biblioteka) {
+	public static void addAuthor(Library library) {
 		// ucitaj sve o autoru sa tastature
-		Author autor = AutorValidacije.dodajAutora();
+		Author author = AuthorValidation.addAuthor();
 		do {
 			// pretpostavi da je trenutni id ok
-			boolean nadjen = false;
+			boolean found = false;
 
 			// prodji kroz sve autore
-			for (Author trenutni : biblioteka.getAuthor()) {
+			for (Author current : library.getAuthors()) {
 				// ako je id zapravo zauzet, zapamti to u "nadjen"
-				nadjen = trenutni.getId() == autor.getId();
-				if (nadjen)
+				found = current.getId() == author.getId();
+				if (found)
 					break;
 			}
 
-			if (nadjen) {
+			if (found) {
 				// ako je id nadjen (zauzet), unesi novi id, i setuj ga autoru koga je korisnik
 				// vec uneo
 				// ovo izbegava scenario da mora ponovo da unosi celog autora
-				System.out.println("Id je zauzet. Unesite novi id");
-				Integer noviId = Validation.numberEntry(1, null);
+				System.out.println("Id is taken. Enter new id");
+				Integer newId = Validation.numberEntry(1, null);
 
-				autor.setId(noviId);
+				author.setId(newId);
 				// u if grani nema break, sto znaci da ces se wratiti u do-while
 			} else {
 				// ako id nije nadjen (slobodan je) izadji iz celog ovog do-while-a
@@ -102,50 +102,50 @@ public class AuthorMenu {
 
 		// ovde sigurno imas valjanog autora sa dobrim id-em, pa mozes bezbedno da ga
 		// dodas
-		biblioteka.getAuthor().add(autor);
-		System.out.println("Autor je uspesno dodat!");
+		library.getAuthors().add(author);
+		System.out.println("Author is added.");
 
 	}
 
-	public static void obrisiAutora(Library biblioteka) {
-		System.out.println("Unesite id autora:");
+	public static void deleteAuthor(Library library) {
+		System.out.println("Enter author's ID:");
 		int id = Validation.numberEntry(1, null);
 
-		boolean nadjen = false;
-		for (Author zaBrisanje : biblioteka.getAuthor()) {
-			if (zaBrisanje.getId() == id) {
-				biblioteka.getAuthor().remove(zaBrisanje);
-				System.out.println("autor je obrisan.");
+		boolean found = false;
+		for (Author forDelete : library.getAuthors()) {
+			if (forDelete.getId() == id) {
+				library.getAuthors().remove(forDelete);
+				System.out.println("Author is deleted.");
 				return;
 			}
-			
+
 		}
-		if (!nadjen) {
-			System.out.println("Autor nije pronadjen");
+		if (!found) {
+			System.out.println("The author was not found.");
 		}
 	}
 
-	public static List<Author> pretragaPoImenuIprezimenu(List<Author> autori) {
-		System.out.println("Unesite tekst za pretragu: ");
-		String unos = Validation.textEntry(3, null);
+	public static List<Author> searchByNameAndSurname(List<Author> authors) {
+		System.out.println("Enter the search text: ");
+		String entry = Validation.textEntry(3, null);
 
-		List<Author> nova = new ArrayList<Author>();
-		for (Author autor : autori) {
-			if (autor.getName().contains(unos) || autor.getSurname().contains(unos)) {
-				nova.add(autor);
+		List<Author> newList = new ArrayList<Author>();
+		for (Author author : authors) {
+			if (author.getName().contains(entry) || author.getSurname().contains(entry)) {
+				newList.add(author);
 			}
 		}
-		return nova;
+		return newList;
 
 	}
 
-	public static Author pretragaPoIDu(List<Author> autori) {
-		System.out.println("Unesite id: ");
+	public static Author searchById(List<Author> authors) {
+		System.out.println("Enter ID: ");
 		int id = Validation.numberEntry(1, null);
 
-		for (Author autor : autori) {
-			if (autor.getId() == id) {
-				return autor;
+		for (Author author : authors) {
+			if (author.getId() == id) {
+				return author;
 			}
 		}
 

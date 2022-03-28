@@ -19,7 +19,7 @@ public class Loan implements Serializable {
 	private LocalDate returnLoanDate;
 	private boolean returned;
 
-	public Loan() {
+	public Loan(Librarian pickedLibrarian, Member pickedMember, Integer lenghtOfLoan, LocalDate date, ArrayList<Book> arrayList) {
 		this.borrowedBooks = new ArrayList<Book>();
 		this.loanLenght = 14;
 		this.returned = false;

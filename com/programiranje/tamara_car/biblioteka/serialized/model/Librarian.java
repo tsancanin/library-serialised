@@ -16,10 +16,10 @@ public class Librarian extends ImportantPerson {
 	}
 
 	public Librarian(int id, String name, String surname, LocalDate birthday, String address, int phoneNumber,
-			String mail, String brojZdravstvenog, String brojSocijalnog) {
+			String mail, String healthNumber, String socialSecurityNumber) {
 		super(id, name, surname, birthday, address, phoneNumber, mail);
-		this.healthNumber = brojZdravstvenog;
-		this.socialSecurityNumber = brojSocijalnog;
+		this.healthNumber = healthNumber;
+		this.socialSecurityNumber = socialSecurityNumber;
 	}
 
 	public String getHealthNumber() {

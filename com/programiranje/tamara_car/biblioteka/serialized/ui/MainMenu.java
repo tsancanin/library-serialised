@@ -1,14 +1,14 @@
 package programiranje.tamara_car.biblioteka.serialized.ui;
 
 import programiranje.tamara_car.biblioteka.serialized.model.Library;
-import programiranje.tamara_car.biblioteka.serialized.ui.evidencijaPozamljenihKnjiga.PozajmiceMeni;
+import programiranje.tamara_car.biblioteka.serialized.ui.evidencijaPozamljenihKnjiga.LoanMenu;
 import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
 
 public class MainMenu {
 
 	public static void ispisBiblioteke(Library biblioteka) {
 		System.out.println("---------------------------");
-		System.out.println(biblioteka.getNaziv() + "\n"+biblioteka.getAdresa());
+		System.out.println(biblioteka.getName() + "\n"+biblioteka.getAddress());
 		System.out.println("---------------------------");
 	}
 	
@@ -29,19 +29,19 @@ public class MainMenu {
 			}
 			switch (opcija) {
 			case 1:
-				KnjigaMeni.knjigeMeni(biblioteka);
+				BookMenu.bookMenu(biblioteka);
 				break;
 			case 2:
-				PozajmiceMeni.pozajmiceMeni(biblioteka);
+				LoanMenu.loanMenu(biblioteka);
 				break;
 			case 3:
 				AuthorMenu.autorMeni(biblioteka);
 				break;
 			case 4:
-				ZaposleniMeni.zaposleniMeni(biblioteka);
+				LibrarianMenu.librarianMenu(biblioteka);
 				break;
 			case 5:
-				ClanMeni.clanMeni(biblioteka);
+				MemberMenu.memberMenu(biblioteka);
 				break;
 			}
 		} 

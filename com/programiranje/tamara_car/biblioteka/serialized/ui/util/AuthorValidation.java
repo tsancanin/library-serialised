@@ -5,30 +5,30 @@ import java.util.List;
 import programiranje.tamara_car.biblioteka.serialized.model.Author;
 import programiranje.tamara_car.biblioteka.serialized.model.Library;
 
-public class AutorValidacije {
+public class AuthorValidation {
 
-	public static Author izborAutora(List<Author> autori) {
+	public static Author selectAuthor(List<Author> authors) {
 
-		System.out.println("Odaberite redni broj autora: ");
-		for (int i = 0; i < autori.size(); i++) {
-			System.out.println(i + 1 + ". " + autori.get(i));
+		System.out.println("Select the ordinal number of the Author: ");
+		for (int i = 0; i < authors.size(); i++) {
+			System.out.println(i + 1 + ". " + authors.get(i));
 		}
-		Integer izbor = Validation.numberEntry(1, autori.size());
-		return autori.get(izbor - 1);
+		Integer choice = Validation.numberEntry(1, authors.size());
+		return authors.get(choice - 1);
 	}
 
-	public static Author dodajAutora() {
+	public static Author addAuthor() {
 
-		System.out.println("Unesite id: ");
+		System.out.println("Enter id: ");
 		int id = Validation.numberEntry(1, null);
 		
-		System.out.println("Unesite ime autora: ");
-		String ime = Validation.textEntry(3, null);
+		System.out.println("Enter the author's name: ");
+		String name = Validation.textEntry(3, null);
 
-		System.out.println("Unesite prezime autora: ");
-		String prezime = Validation.textEntry(3, null);
-		Author autor = new Author(id, ime, prezime);
-		return autor;
+		System.out.println("Enter the author's surname: ");
+		String surname = Validation.textEntry(3, null);
+		Author author = new Author(id, name, surname);
+		return author;
 	}
 
 }

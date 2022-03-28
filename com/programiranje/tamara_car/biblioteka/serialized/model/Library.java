@@ -29,43 +29,44 @@ public class Library implements Serializable {
 		this.address = address;
 	}
 
-	public String getNaziv() {
+	
+	public String getName() {
 		return name;
 	}
 
-	public void setNaziv(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getAdresa() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAdresa(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public ArrayList<Author> getAuthor() {
+	public ArrayList<Author> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthor(ArrayList<Author> authors) {
+	public void setAuthors(ArrayList<Author> authors) {
 		this.authors = authors;
 	}
 
-	public ArrayList<Member> getMember() {
+	public ArrayList<Member> getMembers() {
 		return members;
 	}
 
-	public void setMember(ArrayList<Member> members) {
+	public void setMembers(ArrayList<Member> members) {
 		this.members = members;
 	}
 
-	public ArrayList<Librarian> getZaposleni() {
+	public ArrayList<Librarian> getLibrarians() {
 		return librarians;
 	}
 
-	public void setZaposleni(ArrayList<Librarian> librarians) {
+	public void setLibrarians(ArrayList<Librarian> librarians) {
 		this.librarians = librarians;
 	}
 
