@@ -1,12 +1,12 @@
-package programiranje.tamara_car.biblioteka.serialized.ui;
+package programming.tamara.library.serialized.ui;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Library;
-import programiranje.tamara_car.biblioteka.serialized.model.Member;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.MemberValidation;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
+import programming.tamara.library.serialized.model.Library;
+import programming.tamara.library.serialized.model.Member;
+import programming.tamara.library.serialized.ui.util.MemberValidation;
+import programming.tamara.library.serialized.ui.util.Validation;
 
 public class MemberMenu {
 
@@ -63,12 +63,11 @@ public class MemberMenu {
 				}
 				break;
 			}
-			case 6:
-			{	 
-				List<Member> founded =searchByNameAndSurname(library.getMembers());
-				if(founded.isEmpty()) {
-					System.out.println("Trazeni clan ne postoji.");
-				}else {
+			case 6: {
+				List<Member> founded = searchByNameAndSurname(library.getMembers());
+				if (founded.isEmpty()) {
+					System.out.println("Member do not exist.");
+				} else {
 					System.out.println(founded);
 				}
 				break;
@@ -111,7 +110,7 @@ public class MemberMenu {
 
 	public static Member searchByMemberId(List<Member> members) {
 		System.out.println("Enter the member's ID: ");
-		int id = Validation.numberEntry(1, null);
+		Integer id = Validation.numberEntry(1, null);
 
 		for (Member searchedMember : members) {
 			if (searchedMember.getMemberId() == id) {
@@ -122,19 +121,17 @@ public class MemberMenu {
 	}
 
 	public static List<Member> searchByNameAndSurname(List<Member> members) {
-		
+
 		System.out.println("Enter text for search: ");
 		String text = Validation.textEntry(3, null);
 		List<Member> filtered = new ArrayList<Member>();
 		for (Member member : members) {
-			if (
-					member.getName().toLowerCase().contains(text.toLowerCase()) 
-					|| member.getSurname().toLowerCase().contains(text.toLowerCase())
-				) {
+			if (member.getName().toLowerCase().contains(text.toLowerCase())
+					|| member.getSurname().toLowerCase().contains(text.toLowerCase())) {
 				filtered.add(member);
 			}
 		}
-		
+
 		return filtered;
 	}
 

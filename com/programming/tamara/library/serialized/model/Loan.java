@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.model;
+package programming.tamara.library.serialized.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -27,7 +27,6 @@ public class Loan implements Serializable {
 
 	public Loan(ArrayList<Book> borrowedBooks, Librarian librarian, Member member, int loanLenght,
 			LocalDate takeLoanDate) {
-		super();
 		this.borrowedBooks = borrowedBooks;
 		this.librarian = librarian;
 		this.member = member;

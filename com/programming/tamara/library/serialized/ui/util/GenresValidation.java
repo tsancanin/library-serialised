@@ -1,6 +1,6 @@
-package programiranje.tamara_car.biblioteka.serialized.ui.util;
+package programming.tamara.library.serialized.ui.util;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Genres;
+import programming.tamara.library.serialized.model.Genres;
 
 public class GenresValidation {
 	

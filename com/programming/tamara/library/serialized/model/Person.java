@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.model;
+package programming.tamara.library.serialized.model;
 
 import java.io.Serializable;
 
@@ -47,7 +47,11 @@ public abstract class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return ("=========================" + "\n| id: " + id + ",\n| Name: " + name + ",\n| Surname: " + surname);
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n ID: "+id);
+		sb.append("\n Name: "+ name);
+		sb.append("\n Surname: "+ surname);
+		return sb.toString();
 	}
 
 }

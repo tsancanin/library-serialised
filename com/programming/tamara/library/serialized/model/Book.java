@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.model;
+package programming.tamara.library.serialized.model;
 
 import java.io.Serializable;
 
@@ -64,9 +64,16 @@ public class Book implements Serializable {
 
 	@Override
 	public String toString() {
-		// TODO: uraditi preko string buffera lep ispis
-		return "Book idBooks=" + idBook + ", title=" + title + ", author=" + author + ", genre=" + genre
-				+ ", numberOfBooks=" + numberOfBooks + "]";
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n**************************");
+		sb.append("\n Book ID:" + idBook);
+		sb.append("\n Title: "+ title);
+		sb.append("\n "+ author);
+		sb.append("\n Genre: "+ genre);
+		sb.append("\n Number of books: "+numberOfBooks);
+		sb.append("\n **************************");
+		
+		return sb.toString();
 	}
 
 }

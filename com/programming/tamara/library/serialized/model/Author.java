@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.model;
+package programming.tamara.library.serialized.model;
 
 import java.io.Serializable;
 
@@ -16,7 +16,7 @@ public class Author extends Person implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Author:  "+super.toString();
+		return "---Author---  "+ super.toString();
 	}
 	
 	

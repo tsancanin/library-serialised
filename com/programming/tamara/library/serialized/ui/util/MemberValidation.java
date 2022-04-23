@@ -1,8 +1,8 @@
-package programiranje.tamara_car.biblioteka.serialized.ui.util;
+package programming.tamara.library.serialized.ui.util;
 
 import java.time.LocalDate;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Member;
+import programming.tamara.library.serialized.model.Member;
 
 public class MemberValidation {
 
@@ -15,7 +15,7 @@ public class MemberValidation {
 			Integer personalId = Validation.numberEntry(1, null);
 			changedMember.setId(personalId);
 		}
-		System.out.println("Enter the membership ID: ");
+		System.out.println("Enter the member ID: ");
 		int membershipId = Validation.numberEntry(1, null);
 		changedMember.setMemberId(membershipId);
 		System.out.println("Enter the member name: ");
