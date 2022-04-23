@@ -1,9 +1,9 @@
-package programiranje.tamara_car.biblioteka.serialized.ui.util;
+package programming.tamara.library.serialized.ui.util;
 
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Author;
-import programiranje.tamara_car.biblioteka.serialized.model.Library;
+import programming.tamara.library.serialized.model.Author;
+import programming.tamara.library.serialized.model.Library;
 
 public class AuthorValidation {
 

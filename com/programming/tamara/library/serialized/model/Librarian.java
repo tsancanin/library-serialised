@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.model;
+package programming.tamara.library.serialized.model;
 
 import java.time.LocalDate;
 
@@ -40,7 +40,12 @@ public class Librarian extends ImportantPerson {
 
 	@Override
 	public String toString() {
-		return super.toString();
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("\n Health number: "+healthNumber);
+		sb.append("\n Social security number: "+ socialSecurityNumber);
+		sb.append("\n--------------------------");
+		return sb.toString();
 	}
 
 }

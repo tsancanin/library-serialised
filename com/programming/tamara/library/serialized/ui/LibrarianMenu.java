@@ -1,12 +1,12 @@
-package programiranje.tamara_car.biblioteka.serialized.ui;
+package programming.tamara.library.serialized.ui;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Library;
-import programiranje.tamara_car.biblioteka.serialized.model.Librarian;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.librarianValidation;
+import programming.tamara.library.serialized.model.Librarian;
+import programming.tamara.library.serialized.model.Library;
+import programming.tamara.library.serialized.ui.util.Validation;
+import programming.tamara.library.serialized.ui.util.librarianValidation;
 
 public class LibrarianMenu {
 
@@ -95,6 +95,7 @@ public class LibrarianMenu {
 		} while (true);
 		library.getLibrarians().add(librarian);
 		System.out.println("Librarian is added!");
+		
 
 	}
 
@@ -162,7 +163,9 @@ public class LibrarianMenu {
 			System.out.println("Librarian not found.");
 		} else {
 			library.getLibrarians().remove(found);
+			System.out.println("Librarian is deleted.");
 		}
+		
 	}
 
 }

@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.ui.util;
+package programming.tamara.library.serialized.ui.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,13 +18,13 @@ public class Validation {
 
 			try {
 				int number = Integer.parseInt(entry);
-
+				
 				if (min != null && number < min) {
-					System.out.println("The number must be greater than or equal to " + min);
+					System.out.println("The number must be greater than "+ min +"or equal to " + min);
 					continue;
 				}
 				if (max != null && number > max) {
-					System.out.println("The number must be less than or equal to" + max);
+					System.out.println("The number must be less than"+max+ "or equal to" + max);
 					continue;
 				}
 
@@ -48,11 +48,11 @@ public class Validation {
 			String entry = in.nextLine();
 			entry = entry.strip();
 			if (min != null && entry.length() < min) {
-				System.out.println("Lenght of text must bee greater or equal to " + min);
+				System.out.println("Lenght of text must bee greater than " + min + "or equal to " + min);
 				continue;
 			}
 			if (max != null && entry.length() > max) {
-				System.out.println("Lenght of text must bee less than or equal to " + max);
+				System.out.println("Lenght of text must bee less than "+ max +" or equal to " + max);
 				continue;
 			}
 

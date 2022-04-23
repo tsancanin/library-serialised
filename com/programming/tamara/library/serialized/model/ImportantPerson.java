@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.model;
+package programming.tamara.library.serialized.model;
 
 import java.time.LocalDate;
 
@@ -60,8 +60,14 @@ public abstract class ImportantPerson extends Person {
 
 	@Override
 	public String toString() {
-		return (super.toString() + ",\n| datumRodjenja=" + birthday + ",\n| adresa=" + address + ",\n| brojTelefona="
-				+ phoneNumber + ",\n| mail=" + mail);
+		StringBuilder sb = new StringBuilder();
+		sb.append("--------------------------");
+		sb.append("\n"+ super.toString());
+		sb.append("\n Birthday: "+birthday);
+		sb.append("\n Address: "+address);
+		sb.append("\n Phone number :"+phoneNumber);
+		sb.append("\n Mail: "+mail);
+		return sb.toString();
 	}
 
 }

@@ -1,18 +1,20 @@
-package programiranje.tamara_car.biblioteka.serialized.ui.util;
+package programming.tamara.library.serialized.ui.util;
 
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Author;
-import programiranje.tamara_car.biblioteka.serialized.model.Book;
-import programiranje.tamara_car.biblioteka.serialized.model.Genres;
+import programming.tamara.library.serialized.model.Author;
+import programming.tamara.library.serialized.model.Book;
+import programming.tamara.library.serialized.model.Genres;
+import programming.tamara.library.serialized.model.Library;
 
 public class BookValidation {
 	public static Book addBook(Integer id,List<Author>authors) {
 		Integer bookId = id;
-		if(bookId==null) {
+		if(bookId==null) { 
 			System.out.println("Enter book ID: ");
 			 bookId = Validation.numberEntry(1,null);
 		}
+		
 		System.out.println("Enter book title: ");
 		String bookTitle = Validation.textEntry(1, 250);
 		

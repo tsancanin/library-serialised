@@ -1,9 +1,9 @@
-package programiranje.tamara_car.biblioteka.serialized.ui.util;
+package programming.tamara.library.serialized.ui.util;
 
 import java.time.LocalDate;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Library;
-import programiranje.tamara_car.biblioteka.serialized.model.Librarian;
+import programming.tamara.library.serialized.model.Librarian;
+import programming.tamara.library.serialized.model.Library;
 
 public class librarianValidation {
 	

@@ -1,13 +1,13 @@
-package programiranje.tamara_car.biblioteka.serialized.ui;
+package programming.tamara.library.serialized.ui;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Author;
-import programiranje.tamara_car.biblioteka.serialized.model.Library;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.AuthorValidation;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
+import programming.tamara.library.serialized.model.Author;
+import programming.tamara.library.serialized.model.Library;
+import programming.tamara.library.serialized.ui.util.AuthorValidation;
+import programming.tamara.library.serialized.ui.util.Validation;
 
 public class AuthorMenu {
 	public static Scanner in = new Scanner(System.in);
@@ -131,7 +131,7 @@ public class AuthorMenu {
 
 		List<Author> newList = new ArrayList<Author>();
 		for (Author author : authors) {
-			if (author.getName().contains(entry) || author.getSurname().contains(entry)) {
+			if (author.getName().toLowerCase().contains(entry) || author.getSurname().toLowerCase().contains(entry)) {
 				newList.add(author);
 			}
 		}

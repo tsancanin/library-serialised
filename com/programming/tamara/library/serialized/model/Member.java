@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.model;
+package programming.tamara.library.serialized.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -30,7 +30,11 @@ public class Member extends ImportantPerson implements Serializable {
 
 	@Override
 	public String toString() {
-		return (super.toString() + ",\n| member ID: " + memberId);
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("\n Member ID: "+memberId);
+		sb.append("\n--------------------------");
+		return sb.toString();
 	}
 	
 	

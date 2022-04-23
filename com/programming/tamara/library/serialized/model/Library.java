@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.model;
+package programming.tamara.library.serialized.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

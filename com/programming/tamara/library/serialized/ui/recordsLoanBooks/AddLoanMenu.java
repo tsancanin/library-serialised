@@ -1,19 +1,19 @@
-package programiranje.tamara_car.biblioteka.serialized.ui.evidencijaPozamljenihKnjiga;
+package programming.tamara.library.serialized.ui.recordsLoanBooks;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Author;
-import programiranje.tamara_car.biblioteka.serialized.model.Library;
-import programiranje.tamara_car.biblioteka.serialized.model.Member;
-import programiranje.tamara_car.biblioteka.serialized.model.Book;
-import programiranje.tamara_car.biblioteka.serialized.model.Loan;
-import programiranje.tamara_car.biblioteka.serialized.model.Librarian;
-import programiranje.tamara_car.biblioteka.serialized.ui.MemberMenu;
-import programiranje.tamara_car.biblioteka.serialized.ui.BookMenu;
-import programiranje.tamara_car.biblioteka.serialized.ui.LibrarianMenu;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
+import programming.tamara.library.serialized.model.Author;
+import programming.tamara.library.serialized.model.Book;
+import programming.tamara.library.serialized.model.Librarian;
+import programming.tamara.library.serialized.model.Library;
+import programming.tamara.library.serialized.model.Loan;
+import programming.tamara.library.serialized.model.Member;
+import programming.tamara.library.serialized.ui.BookMenu;
+import programming.tamara.library.serialized.ui.LibrarianMenu;
+import programming.tamara.library.serialized.ui.MemberMenu;
+import programming.tamara.library.serialized.ui.util.Validation;
 
 public class AddLoanMenu {
 
@@ -61,7 +61,7 @@ public class AddLoanMenu {
 				changeDateOfBorrowBook(forCreate);
 				break;
 			case 7:
-				System.out.println("Zavrseno kreiranje pozajmice");
+				System.out.println("Loan creation completed.");
 				return forCreate;
 			}
 		}

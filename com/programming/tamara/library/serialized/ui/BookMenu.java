@@ -1,4 +1,4 @@
-package programiranje.tamara_car.biblioteka.serialized.ui;
+package programming.tamara.library.serialized.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import programiranje.tamara_car.biblioteka.serialized.model.Author;
-import programiranje.tamara_car.biblioteka.serialized.model.Library;
-import programiranje.tamara_car.biblioteka.serialized.model.Book;
-import programiranje.tamara_car.biblioteka.serialized.model.Genres;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.AuthorValidation;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.BookValidation;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.Validation;
-import programiranje.tamara_car.biblioteka.serialized.ui.util.GenresValidation;
+import programming.tamara.library.serialized.model.Author;
+import programming.tamara.library.serialized.model.Book;
+import programming.tamara.library.serialized.model.Genres;
+import programming.tamara.library.serialized.model.Library;
+import programming.tamara.library.serialized.ui.util.AuthorValidation;
+import programming.tamara.library.serialized.ui.util.BookValidation;
+import programming.tamara.library.serialized.ui.util.GenresValidation;
+import programming.tamara.library.serialized.ui.util.Validation;
 
 public class BookMenu {
 
@@ -117,6 +117,21 @@ public class BookMenu {
 	public static void addBook(Library library) {
 
 		Book book = BookValidation.addBook(null, library.getAuthors());// ui
+		do {
+			boolean found = false;
+			for(Book curent: library.getListOfBooks()) {
+				found = curent.getIdBook() == book.getIdBook();
+				if(found)
+					break;
+			}
+			if(found) {
+				System.out.println("Id is taken. Enter new id");
+				Integer newId = Validation.numberEntry(1, null);
+				book.setIdBook(newId);
+			}else
+				break;
+		} while (true);
+		
 		addingAbook(library.getAllBooks(), book);
 		System.out.println("Book is added.");// ui
 
@@ -203,6 +218,7 @@ public class BookMenu {
 		removingBook(library.getAllBooks(), selectedBook);
 		selectedBook.setGenre(newGenre);
 		addingAbook(library.getAllBooks(), selectedBook);
+		System.out.println("Genre is changed.");
 		
 	}
 
@@ -216,6 +232,7 @@ public class BookMenu {
 		removingBook(library.getAllBooks(), selectedBook);
 		selectedBook.setAuthor(newAuthor);
 		addingAbook(library.getAllBooks(), selectedBook);
+		System.out.println("Author is changed.");
 
 		
 	}
