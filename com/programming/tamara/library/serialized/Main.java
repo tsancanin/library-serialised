@@ -5,15 +5,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Connection;
 
 import programming.tamara.library.serialized.model.Library;
 import programming.tamara.library.serialized.ui.MainMenu;
+import programming.tamara.library.serialized.util.DataBaseConnection;
 
 public class Main {
 
 	private static final String FILE_NAME = "library.ser";
 
 	public static void main(String[] args) {
+		
+		DataBaseConnection.connectingWithBase();
+		
 		Library library = loadingLibrary();
 		MainMenu.mainMenu(library);
 		saveLibrary(library);

@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import programming.tamara.library.serialized.model.Author;
 import programming.tamara.library.serialized.model.Library;
+import programming.tamara.library.serialized.service.AuthorService;
 import programming.tamara.library.serialized.ui.util.AuthorValidation;
 import programming.tamara.library.serialized.ui.util.Validation;
 
@@ -65,8 +66,13 @@ public class AuthorMenu {
 
 	public static void listAllAuthor(Library library) {
 		System.out.println("List of Autors: ");
-		for (Author author : library.getAuthors()) {
-			System.out.println(author);
+		try {
+			for (Author author : AuthorService.findAll()) {
+				System.out.println(author);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error while listing authors.");
 		}
 	}
 
